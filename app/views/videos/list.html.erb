@@ -12,7 +12,7 @@
 			<%= image_tag video['thumbnail_url'], :size => "210x150", :alt => video['description'] %>
 		</a>
 		
-		<div id="modal-video-<%= video['id'] %>" class="modal hide fade in">
+		<div id="modal-video-<%= video['id'] %>" class="modal hide fade in video-popup">
 			<div class="modal-header">
 				<a href="#" class="close">×</a>
 				<h3><%= video['title'] %></h3>
@@ -21,18 +21,15 @@
 				<p class="embed">
 					<%=raw video_embed_code(video['id'], :player_type => 'simple', :width => width, :heigth => height) %>
 				</p>
+				<p>
+					<a href="<%= delete_video_path(video['id']) %>" class="btn small secondary video-delete" rel="nofollow" data-content="<%= video['id'] %>">Delete</a>
+				</p>
 			</div>
 		</div>
 		
 	</li>
 	<% end %>
 	<script>
-		$("a[rel=popover]")
-		.popover({
-			offset: 10
-		})
-		.click(function(e) {
-			e.preventDefault()
-		});
+		$(document).trigger("ajax-update");
 	</script>
 <% end %>

@@ -50,6 +50,9 @@ ViddlerApp::Application.routes.draw do
     collection do
       get 'list'
     end
+    member do 
+      post 'delete'
+    end
   end
   
   # You can have the root of your site routed with "root"

@@ -1,0 +1,54 @@
+// This is a manifest file that'll be compiled into including all the files listed below.
+// Add new JavaScript/Coffee code in separate files in this directory and they'll automatically
+// be included in the compiled file accessible from http://example.com/assets/application.js
+// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
+// the compiled file.
+//
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap-alerts
+//= require bootstrap-dropdown
+//= require bootstrap-modal
+//= require bootstrap-tabs
+//= require bootstrap-twipsy
+//= require bootstrap-popover
+//= require_tree .
+<%
+	app = Rails.application.routes.url_helpers
+%>
+$(function() {
+	$('#videos').load('<%= app.list_videos_path %>');
+});
+
+$(document).bind("hide-all-modals", function(event) {
+	$(".video-popup").each(function(i,e) {
+		if($(e).is(":visible")) $(e).modal("hide")
+	});
+});
+
+$(document).bind("ajax-update", function(event) {
+	$("a[rel=popover]")
+	.popover({
+		offset: 10,
+		html: true,
+		placement: 'below'
+	})
+	.click(function(e) {
+		e.preventDefault()
+	});
+	
+	$("a.video-delete").click(function(event) {
+		$.post(this.href)
+			.success(function(data, status, jqXHR) {
+		    $('#videos').html(data);
+				$(document).trigger("hide-all-modals");
+				return false;
+			})
+			.error(function(data, status, jqXHR) {
+				alert('Error deleting video.');
+				$(document).trigger("hide-all-modals");
+				return false;
+			});
+		event.preventDefault();
+	});
+});
