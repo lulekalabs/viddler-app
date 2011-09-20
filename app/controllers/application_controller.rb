@@ -4,11 +4,13 @@ class ApplicationController < ActionController::Base
   protected
   
   def get_session
-    @viddler_api_key  = "17yncitdjk2bn1zfjiry"
-    @viddler_user     = "bvision"
-    @viddler_password = "sanfran415"
-    @viddler          = Viddler::Client.new(@viddler_api_key)
-    @viddler_session  = @viddler.get('viddler.users.auth', 
-      :api_key => @viddler_api_key, :user => @viddler_user, :password => @viddler_password, :get_record_token => "1")
+    @viddler = Viddler::Client.new(ViddlerApp::Viddler.api_key)
+    @viddler.xauthenticate! ViddlerApp::Viddler.user, ViddlerApp::Viddler.password, :get_record_token => "1"
+    # @viddler_session  = @viddler.get('viddler.users.auth', 
+    #   :api_key => ViddlerApp::Viddler.api_key, 
+    #   :user => ViddlerApp::Viddler.user, 
+    #   :password => ViddlerApp::Viddler.password, 
+    #   :get_record_token => "1"
+    # )
   end
 end

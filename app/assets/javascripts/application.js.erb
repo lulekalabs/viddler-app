@@ -20,10 +20,15 @@ $(function() {
 	$('#videos').load('<%= app.list_videos_path %>');
 });
 
-$(document).bind("hide-all-modals", function(event) {
+$(document).bind("hide-all-popovers", function(event) {
 	$(".video-popup").each(function(i,e) {
 		if($(e).is(":visible")) $(e).modal("hide")
 	});
+	
+	$("a[rel=popover]").each(function(i,e) {
+		if($(e).is(":visible")) $(e).popover("hide")
+	});
+	
 });
 
 $(document).bind("ajax-update", function(event) {
@@ -38,17 +43,19 @@ $(document).bind("ajax-update", function(event) {
 	});
 	
 	$("a.video-delete").click(function(event) {
-		$.post(this.href)
-			.success(function(data, status, jqXHR) {
-		    $('#videos').html(data);
-				$(document).trigger("hide-all-modals");
-				return false;
-			})
-			.error(function(data, status, jqXHR) {
-				alert('Error deleting video.');
-				$(document).trigger("hide-all-modals");
-				return false;
-			});
+		if(confirm("Do you want to delete this video?")) {
+			$.post(this.href)
+				.success(function(data, status, jqXHR) {
+			    $('#videos').html(data);
+					$(document).trigger("hide-all-popovers");
+					return false;
+				})
+				.error(function(data, status, jqXHR) {
+					alert('Error deleting video.');
+					$(document).trigger("hide-all-popovers");
+					return false;
+				});
+		}
 		event.preventDefault();
 	});
 });

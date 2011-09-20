@@ -11,7 +11,7 @@ class VideosController < ApplicationController
   end
   
   def delete
-    result = @viddler.post 'viddler.videos.delete', :sessionid => @viddler_session['auth']['sessionid'], 
+    result = @viddler.post 'viddler.videos.delete', :sessionid => @viddler.sessionid, 
       :video_id => params[:id]
     if result['success']
       load_videos and render :template => "videos/list", :layout => false
@@ -23,7 +23,7 @@ class VideosController < ApplicationController
   protected
   
   def get_record_token
-    @record_token = @viddler_session['auth']['record_token']
+    @record_token = @viddler.session['record_token']
   end
   
   def load_videos

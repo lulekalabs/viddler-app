@@ -21,9 +21,9 @@
 				<p class="embed">
 					<%=raw video_embed_code(video['id'], :player_type => 'simple', :width => width, :heigth => height) %>
 				</p>
-				<p>
-					<a href="<%= delete_video_path(video['id']) %>" class="btn small secondary video-delete" rel="nofollow" data-content="<%= video['id'] %>">Delete</a>
-				</p>
+			</div>
+			<div class="modal-footer">
+				<a href="<%= delete_video_path(video['id']) %>" class="btn small secondary video-delete" rel="nofollow" data-content="<%= video['id'] %>">Delete</a>
 			</div>
 		</div>
 		
