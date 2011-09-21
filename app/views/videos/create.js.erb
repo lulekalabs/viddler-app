@@ -1,0 +1,14 @@
+<% unless @video.new_record? %>
+	$(document).trigger("reset-form");
+	$('#videos').load('<%= list_videos_url %>');
+	$(document).trigger("hide-popovers");
+<% end %>
+
+/*
+alert('success!');
+<% if remotipart_submitted? %>
+  alert('submitted via remotipart')
+<% else %>
+  alert('submitted via native jquery-ujs')
+<% end %>
+*/

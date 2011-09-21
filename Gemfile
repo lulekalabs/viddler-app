@@ -5,8 +5,8 @@ gem 'rails', '3.1.0'
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
-# gem 'sqlite3'
-
+gem 'sqlite3', :groups => [:development, :test]
+gem 'pg'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -36,3 +36,8 @@ end
 
 gem 'viddler-ruby'
 gem 'heroku'
+# gem "simple_form"
+gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
+gem 'remotipart', '~> 1.0'
+gem "client_side_validations"
+gem "friendly_id", "~> 4.0.0.beta8"

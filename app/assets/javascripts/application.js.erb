@@ -6,6 +6,8 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require rails.validations
+//= require jquery.remotipart
 //= require bootstrap-alerts
 //= require bootstrap-dropdown
 //= require bootstrap-modal
@@ -18,9 +20,18 @@
 %>
 $(function() {
 	$('#videos').load('<%= app.list_videos_path %>');
+	$('#upload-form .cancel').click(function() {
+		$(document).trigger("hide-popovers");
+	});
 });
 
-$(document).bind("hide-all-popovers", function(event) {
+$(document).bind("reset-form", function(event) {
+	$('#upload-form').load('<%= app.new_video_path %> #upload-form >')
+});
+
+$(document).bind("hide-popovers", function(event) {
+	$("#modal-recorder").modal("hide");
+	$("#modal-uploader").modal("hide");
 	$(".video-popup").each(function(i,e) {
 		if($(e).is(":visible")) $(e).modal("hide")
 	});
@@ -28,10 +39,9 @@ $(document).bind("hide-all-popovers", function(event) {
 	$("a[rel=popover]").each(function(i,e) {
 		if($(e).is(":visible")) $(e).popover("hide")
 	});
-	
 });
 
-$(document).bind("ajax-update", function(event) {
+$(document).bind("list-loaded", function(event) {
 	$("a[rel=popover]")
 	.popover({
 		offset: 10,
@@ -47,12 +57,12 @@ $(document).bind("ajax-update", function(event) {
 			$.post(this.href)
 				.success(function(data, status, jqXHR) {
 			    $('#videos').html(data);
-					$(document).trigger("hide-all-popovers");
+					$(document).trigger("hide-popovers");
 					return false;
 				})
 				.error(function(data, status, jqXHR) {
 					alert('Error deleting video.');
-					$(document).trigger("hide-all-popovers");
+					$(document).trigger("hide-popovers");
 					return false;
 				});
 		}

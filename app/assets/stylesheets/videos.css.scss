@@ -1,3 +1,22 @@
 // Place all the styles related to the videos controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+  padding-top: 60px;
+}
+
+ul.media-grid p {
+	margin-left: 20px;
+}
+
+form#upload-form {
+	margin-bottom: 0;
+}
+
+.topbar a.brand {
+	font-weight: bold;
+}
+
+.topbar a.brand span.label {
+	font-size: 20px
+}
