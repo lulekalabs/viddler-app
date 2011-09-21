@@ -1,7 +1,7 @@
 <% unless @video.new_record? %>
+	$(document).trigger("hide-popovers");
 	$(document).trigger("reset-form");
 	$('#videos').load('<%= list_videos_url %>');
-	$(document).trigger("hide-popovers");
 <% end %>
 
 /*

@@ -10,7 +10,7 @@ module ClientSideValidations
               :form_class => nil,
               :wrapper_class => 'clearfix',
               :wrapper_error_class => "error",
-              :error_class => "help-block",
+              :error_class => "help-block error",
               :error_tag => "span",
               :wrapper_tag => "div"
             }

@@ -26,7 +26,10 @@ $(function() {
 });
 
 $(document).bind("reset-form", function(event) {
-	$('#upload-form').load('<%= app.new_video_path %> #upload-form >')
+	$('#upload-form').each (function(){
+	  this.reset();
+	});
+	$('#upload-form .help-block.error').remove();
 });
 
 $(document).bind("hide-popovers", function(event) {
