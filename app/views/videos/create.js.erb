@@ -2,6 +2,8 @@
 	$(document).trigger("hide-popovers");
 	$(document).trigger("reset-form");
 	$('#videos').load('<%= list_videos_url %>');
+<% else %>
+	$(document).trigger("hide-popovers");
 <% end %>
 
 /*

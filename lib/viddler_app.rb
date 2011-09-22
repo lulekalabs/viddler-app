@@ -6,8 +6,8 @@ module ViddlerApp
   
   @env[:development] = {
     :viddler => {
-      :api_key  => "17yncitdjk2bn1zfjiry",
-      :user     => "bvision",
+      :api_key  => "19naunv1iq7cz1q7xw4l",
+      :user     => "bvision_dev",
       :password => "sanfran415"
     }
   }
