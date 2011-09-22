@@ -1,33 +1,51 @@
 class Video < ActiveRecord::Base
-  extend FriendlyId
-  attr_accessor :file
-
+  attr_accessor :viddler, :source
   belongs_to :user
   belongs_to :session
 
-  validate :source, :presence => true
-  validate :video_id, :uniqueness => true, :presence => true
-  validates_presence_of :title, :file, :if => :upload?
-  validates_associated :user, :if => :upload?
-  validate :slug, :uniqueness => true, :presence => true
-  friendly_id :video_id
+  validate :video_id, :uniqueness => {:case_sensitive => false}
+  validate :title, :uniqueness => {:case_sensitive => false}
 
   accepts_nested_attributes_for :user
 
-  before_validation :remove_user_if_webcam_source
+  class << self
+
+    def instance_for(attributes = {})
+      record = new attributes
+      record.user = nil if record.webcam?
+      record
+    end
   
+    def new_with_cast(*a, &b)  
+      if (h = a.first).is_a? Hash and (source = h.delete(:source) || h.delete('source')) and 
+        (k = source.class == Class ? source : klass(source)) != self
+        raise "type not descendent of Video" unless k < self  # klass should be a descendant of us  
+        return k.new(*a, &b)  
+      end  
+      new_without_cast(*a, &b)  
+    end  
+    alias_method_chain :new, :cast
+    
+    def klass(source = nil)
+      [RecordedVideo, UploadedVideo].each do |sc|
+        return sc if !source.blank? && (sc.source.to_s == source.to_s || sc.name.underscore == source.to_s)
+      end
+      Video
+    end
+
+    def source; nil; end
+  end
+
   def webcam?
-    self.source && !!self.source.match(/^webcam/i)
+    self.class.source == :webcam
   end
-  
+
   def upload?
-    self.source && !!self.source.match(/^upload/i)
+    self.class.source == :upload
   end
   
-  protected
-  
-  def remove_user_if_webcam_source
-    self.user = nil if self.webcam?
+  def to_param
+    self.video_id
   end
   
 end

@@ -17,22 +17,8 @@ class VideosController < ApplicationController
   end
   
   def create
+    @video.save
     respond_to do |format|
-      if @video.valid?
-        if @video.upload?
-          # upload to viddler!
-          result = @viddler.upload(@video.file, :title => @video.title, :description => @video.title, :tags => @video.title)
-          unless result['error']
-            @video.attributes = {:video_id => result['video']['id'], :url => result['video']['url'], 
-              :thumbnail_url => result['video']['thumbnail_url'], :description => result['video']['description'], 
-                :user => @user, :session => @session}
-            @video.save!
-          end
-        elsif @video.webcam?
-          @video.attributes = {:session => @session, :user => nil}
-          @video.save!
-        end
-      end
       format.js
     end
   end
@@ -59,12 +45,15 @@ class VideosController < ApplicationController
     @videos = result['list_result']['video_list']
   end
 
+  def video_params
+    (params[:video] || params[:recorded_video] || params[:uploaded_video] || {}).symbolize_keys
+  end
+
   def build_user
-    user_attributes = (params[:video] || {}).delete(:user) || {}
-    @user = User.new user_attributes
+    @user = User.new video_params.delete(:user) || {}
   end
   
   def build_video
-    @video = Video.new (params[:video] || {}).merge(:user => @user)
+    @video = Video.instance_for({:source => "upload", :session => @session, :viddler => @viddler}.merge(video_params.merge(:user => @user)))
   end
 end

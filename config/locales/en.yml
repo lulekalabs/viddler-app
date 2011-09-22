@@ -2,4 +2,4 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  video_successfully_uploaded: "<b>Well done!</b> You successfully uploaded your video. It may take a minute or two before it will appear."

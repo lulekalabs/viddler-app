@@ -7,17 +7,18 @@
 				<%= f.hidden_field :source, :value => "upload" %>
 				<div class="input">
 					<%= f.file_field :file %>
-					<span class="help-block">Video footage no more than 1 minute in length. File formats: MOV, MP4</span>
+					<span class="help-block">Video footage no more than 1 minute in length.</span>
 				</div>
 			</div>
 			
-			<div class="clearfix">
-				<%= f.label :title, "Title" %>
+			<div class="clearfix string required">
+				<%= f.label :title, '<abbr title="required">*</abbr> Title'.html_safe, :class => "string required" %>
 				<div class="input">
-					<%= f.text_field :title, :class => "xlarge", :size => 30 %>
+					<%= f.text_field :title, :class => "xlarge string required", :size => 30, "data-validate" => "true" %>
 					<span class="help-block">Up to 140 characters.</span>
 				</div>
 			</div>
+			
 		</fieldset>
 		<fieldset>
 			<legend>Your Details</legend>

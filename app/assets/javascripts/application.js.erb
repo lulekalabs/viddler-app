@@ -23,6 +23,7 @@ $(function() {
 	$('#upload-form .cancel').click(function() {
 		$(document).trigger("hide-popovers");
 	});
+	$(".alert-message").alert();
 });
 
 $(document).bind("reset-form", function(event) {
@@ -71,4 +72,17 @@ $(document).bind("list-loaded", function(event) {
 		}
 		event.preventDefault();
 	});
+});
+
+jQuery.extend({
+	// E.g. $.alert("This is an errror", "error");
+	alert: function(text, type) {
+		if(typeof(type) === "undefined") type = "info";
+		var selector = ".topbar .alert-message" + "." + type;
+		$(selector).remove();
+		$(".topbar").prepend('<div class="alert-message block-message ' + type + '"><a class="close" href="#">×</a></div>');
+		$(".topbar .alert-message" + "." + type).alert();
+		$(selector).append(text);
+		$(selector).show();
+	}
 });

@@ -1,0 +1,63 @@
+/*
+ * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
+ * the top of the compiled file, but it's generally better to create a new file per style scope.
+ *= require_self
+*/
+@import "bootstrap.css";
+@import "videos.css.scss";
+
+body {
+  padding-top: 60px;
+}
+
+ul.media-grid p {
+	margin-left: 20px;
+}
+
+form#upload-form {
+	margin-bottom: 0;
+}
+
+.topbar a.brand {
+	font-weight: bold;
+}
+
+.topbar a.brand span.label {
+	font-size: 20px
+}
+
+.topbar .alert-message {
+	margin-bottom: 0;
+	-webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+.topbar .alert-message p {
+	line-height: 1.5em;
+}
+
+.topbar .alert-message ul,
+.topbar .alert-message ol  {
+	margin: 5px 0 5px 25px;
+	list-style: disc;
+	display: block;
+	float: none;
+}
+
+.topbar .alert-message ul, 
+.topbar .alert-message p {
+	margin-right: 30px;
+}
+
+.topbar .alert-message li {
+	color: #404040;
+	float: none;
+	display: block;
+}
+
+.topbar .alert-mesasage.block-message li {
+	line-height: 18px;
+	color: gray;
+}

@@ -40,17 +40,16 @@ ActiveRecord::Schema.define(:version => 20110921190710) do
     t.string   "tags"
     t.string   "url"
     t.string   "thumbnail_url"
-    t.string   "slug"
     t.integer  "user_id"
     t.integer  "session_id"
     t.string   "video_id"
-    t.string   "source"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "videos", ["session_id"], :name => "index_videos_on_session_id"
-  add_index "videos", ["slug"], :name => "index_videos_on_slug"
+  add_index "videos", ["type"], :name => "index_videos_on_type"
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
   add_index "videos", ["video_id"], :name => "index_videos_on_video_id"
 

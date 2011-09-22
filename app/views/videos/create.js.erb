@@ -1,16 +1,16 @@
-<% unless @video.new_record? %>
-	$(document).trigger("hide-popovers");
-	$(document).trigger("reset-form");
-	$('#videos').load('<%= list_videos_url %>');
-<% else %>
-	$(document).trigger("hide-popovers");
-<% end %>
-
 /*
-alert('success!');
 <% if remotipart_submitted? %>
   alert('submitted via remotipart')
 <% else %>
   alert('submitted via native jquery-ujs')
 <% end %>
 */
+<% if @video.new_record? %>
+	$.alert('<%= error_messages_for(@video, false).html_safe %>', 'error');
+<% else %>
+	$.alert('<%= I18n.t(:video_successfully_uploaded).html_safe %>', 'success');
+	$(document).trigger("reset-form");
+	$('#videos').load('<%= list_videos_url %>');
+<% end %>
+$(document).trigger("hide-popovers");
+
