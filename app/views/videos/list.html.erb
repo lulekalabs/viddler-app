@@ -1,32 +1,12 @@
-<%
-	width = 525
-	height = 436
-%>
 <% if @videos.blank? %>
 	<p>No videos available.</p>
 <% else %>
 	<% @videos.each do |video| %>
 	<li>
-
-		<a data-controls-modal="modal-video-<%= video['id'] %>" data-backdrop="static" rel="popover" data-content="<%= video['description'] %>" data-original-title="<%= video['title'] %>">
+		<a data-controls-modal="modal-video-<%= video.video_id %>" data-backdrop="static" rel="popover" data-content="<%= video.description %>" data-original-title="<%= video.title %>">
 			<%= image_tag video['thumbnail_url'], :size => "210x150", :alt => video['description'] %>
 		</a>
-		
-		<div id="modal-video-<%= video['id'] %>" class="modal hide fade in video-popup">
-			<div class="modal-header">
-				<a href="#" class="close">×</a>
-				<h3><%= video['title'] %></h3>
-			</div>
-			<div class="modal-body">
-				<p class="embed">
-					<%=raw video_embed_code(video['id'], :player_type => 'simple', :width => width, :heigth => height) %>
-				</p>
-			</div>
-			<div class="modal-footer">
-				<a href="<%= delete_video_path(video['id']) %>" class="btn small secondary video-delete" rel="nofollow" data-content="<%= video['id'] %>">Delete</a>
-			</div>
-		</div>
-		
+		<%= render "show", :video => video %>
 	</li>
 	<% end %>
 	<script>

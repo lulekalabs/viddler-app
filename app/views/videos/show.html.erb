@@ -1,0 +1,9 @@
+<%= render "show", :video => @video, :dom_id => "show-modal-video-#{@video.video_id}" %>
+<a id="show-modal-video-<%= @video.video_id %>-link" data-controls-modal="show-modal-video-<%= @video.video_id %>" data-backdrop="static" rel="popover" data-content="<%= @video.description %>" data-original-title="<%= @video.title %>">
+</a>
+
+<%= javascript_tag do %>
+	$(function() {
+		$("#show-modal-video-<%= @video.video_id %>-link").trigger("click");
+	});
+<% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110921190710) do
+ActiveRecord::Schema.define(:version => 20110923220828) do
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id"
@@ -43,13 +43,14 @@ ActiveRecord::Schema.define(:version => 20110921190710) do
     t.integer  "user_id"
     t.integer  "session_id"
     t.string   "video_id"
-    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "published_at"
+    t.string   "source"
   end
 
+  add_index "videos", ["published_at"], :name => "index_videos_on_published_at"
   add_index "videos", ["session_id"], :name => "index_videos_on_session_id"
-  add_index "videos", ["type"], :name => "index_videos_on_type"
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
   add_index "videos", ["video_id"], :name => "index_videos_on_video_id"
 

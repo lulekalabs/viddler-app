@@ -1,0 +1,7 @@
+<% if @video.valid? %>
+	$(document).trigger("hide-popovers");
+<% else %>
+	$.alert('<%= error_messages_for(@video, false).html_safe %>', 'error');
+	$("#edit-modal-video-<%= @video.video_id %>").html(render("edit"));
+<% end %>
+

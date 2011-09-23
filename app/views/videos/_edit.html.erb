@@ -1,0 +1,28 @@
+<% 
+	video ||= nil 
+	width ||= 200
+	height ||= 125
+	dom_id ||= "edit-modal-video-#{video.video_id}"
+%>
+<div id="<%= dom_id %>" class="modal hide fade in video-popup">
+	<div class="modal-header">
+		<a href="#" class="close">×</a>
+		<h3><%= I18n.t(:edit_video_title) %></h3>
+	</div>
+	
+	<% content_for :embed do %>
+	<p class="embed">
+		<%=raw video_embed_code(video.video_id, :player_type => 'simple', :width => width, :heigth => height) %>
+	</p>
+	<% end %>
+
+	<% content_for :delete do %>
+	<a href="<%= delete_video_path(video.video_id) %>" class="btn secondary video-delete" rel="nofollow" data-content="<%= video.video_id %>">Delete</a>
+	<% end %>
+
+	<%= simple_form_for @video, :url => video_path(@video), 
+		:html => {:method => :put, :id => "edit-form", :multipart => true, :class => "edit form-stacked"}, 
+			:remote => true, :validate => true do |f| %> 
+		<%= render "form", :f => f %>
+	<% end %>
+</div>

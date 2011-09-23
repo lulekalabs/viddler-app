@@ -1,0 +1,17 @@
+<% 
+	video ||= nil 
+	width ||= 525
+	height ||= 436
+	dom_id ||= "modal-video-#{video.video_id}"
+%>
+<div id="<%= dom_id %>" class="modal hide fade in video-popup">
+	<div class="modal-header">
+		<a href="#" class="close">×</a>
+		<h3><%= video.title || "No Title" %></h3>
+	</div>
+	<div class="modal-body">
+		<p class="embed">
+			<%=raw video_embed_code(video.video_id, :player_type => 'simple', :width => width, :heigth => height) %>
+		</p>
+	</div>
+</div>

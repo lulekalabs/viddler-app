@@ -5,4 +5,12 @@ module VideosHelper
     result['video']['embed_code']
   end
   
+  def video_upload_url
+    @video_upload_url or raise "viddler upload url not available, call prepare_upload."
+  end
+
+  def video_upload_token
+    @video_upload_token or raise "viddler upload token not available, call prepare_upload."
+  end
+  
 end

@@ -49,6 +49,7 @@ ViddlerApp::Application.routes.draw do
   resources :videos do
     collection do
       get 'list'
+      get 'uploaded'
     end
     member do 
       post 'delete'

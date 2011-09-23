@@ -20,7 +20,7 @@
 %>
 $(function() {
 	$('#videos').load('<%= app.list_videos_path %>');
-	$('#upload-form .cancel').click(function() {
+	$('.cancel').click(function() {
 		$(document).trigger("hide-popovers");
 	});
 	$(".alert-message").alert();

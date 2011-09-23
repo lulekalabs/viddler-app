@@ -16,6 +16,11 @@
 		<%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
 		<script src="http://cdn-static.viddler.com/js/viddler.js" type="text/javascript"></script>
+		<%= javascript_tag do %>
+			<% flash.each do |key, msg| %>
+				$.alert('<%= msg %>', '<%= key %>');
+			<% end %>
+		<% end %>
 		
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico">
@@ -78,7 +83,27 @@
 						<a href="#" class="close">×</a>
 						<h3>Video Upload</h3>
 					</div>
-					<%= render "new" %>
+					<%= form_tag video_upload_url, :id => "upload-form", :multipart => true do |f| %> 
+						<%= hidden_field_tag :uploadtoken, video_upload_token %>
+						<%= hidden_field_tag :callback, uploaded_videos_url %>
+						<div class="modal-body">
+							<p>
+								<fieldset>
+									<div class="clearfix file required">
+										<label for="file"><abbr title="required">*</abbr> Video file</label>
+										<div class="input">
+											<%= file_field_tag :file, "data-validate" => "true" %>
+											<span class="help-block">Video footage no more than 1 minute in length.</span>
+										</div>
+									</div>
+								</fieldset>	
+							</p>
+						</div>
+						<div class="modal-footer">
+							<input type="submit" class="btn primary" value="Upload">&nbsp;
+							<button type="reset" class="btn cancel">Cancel</button>
+						</div>
+					<% end %>
 				</div>
 
 				<!-- record modal -->
@@ -120,11 +145,11 @@
 					</div>
 				</div>
       </div>
-
       <h2>Latest Videos</h2>
 			<ul id="videos" class="media-grid">
 				<li><p>Loading...<p></li>
 			</ul>
+			<%= yield %>
       <footer>
         <p>&copy; Business Vision 2011</p>
       </footer>

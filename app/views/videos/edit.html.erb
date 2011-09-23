@@ -1,0 +1,9 @@
+<%= render "edit", :video => @video %>
+<a id="edit-modal-video-<%= @video.video_id %>-link" data-controls-modal="edit-modal-video-<%= @video.video_id %>" data-backdrop="static" rel="popover" data-content="<%= @video.description %>" data-original-title="<%= @video.title %>">
+</a>
+
+<%= javascript_tag do %>
+	$(function() {
+		$("#edit-modal-video-<%= @video.video_id %>-link").trigger("click");
+	});
+<% end %>
