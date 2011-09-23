@@ -75,7 +75,9 @@ $(document).bind("list-loaded", function(event) {
 });
 
 jQuery.extend({
-	// E.g. $.alert("This is an errror", "error");
+	/* 
+	 *  E.g. $.alert("This is an errror", "error"); 
+	 */
 	alert: function(text, type) {
 		if(typeof(type) === "undefined") type = "info";
 		var selector = ".topbar .alert-message" + "." + type;
@@ -86,3 +88,23 @@ jQuery.extend({
 		$(selector).show();
 	}
 });
+
+clientSideValidations.formBuilders['SimpleForm::FormBuilder']['add'] = function(element, settings, message) {
+  if (element.data('valid') !== false) {
+    var wrapper = element.closest(settings.wrapper_tag);
+    wrapper.addClass(settings.wrapper_error_class);
+    var errorElement = $('<' + settings.error_tag + ' class="' + settings.error_class + '">' + message + '</' + settings.error_tag + '>');
+    wrapper.append(errorElement);
+	  element.parents("div.clearfix").addClass("error");
+  } else {
+    element.parent().find(settings.error_tag + '.' + settings.error_class).text(message);
+  }
+}
+
+clientSideValidations.formBuilders['SimpleForm::FormBuilder']['remove'] = function(element, settings) {
+  var wrapper = element.closest(settings.wrapper_tag + '.' + settings.wrapper_error_class);
+  wrapper.removeClass(settings.wrapper_error_class);
+  var errorElement = wrapper.find(settings.error_tag + '.' + settings.error_class);
+  errorElement.remove();
+  element.parents("div.clearfix").removeClass("error");
+}

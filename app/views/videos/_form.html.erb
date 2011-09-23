@@ -1,6 +1,6 @@
 <div class="modal-body">
 	<p>
-		<%#= f.error_notification %>
+		<%= f.error_notification %>
 		<fieldset>
 			<div class="clearfix">
 				<%= f.label :file, "Video file" %>
@@ -23,15 +23,28 @@
 		<fieldset>
 			<legend>Your Details</legend>
 			<%= f.fields_for @user do |u| %>
-				<%= u.input :name, :input_html => {:class => "medium"}, :hint => "appears next to video" %>
-				<%= u.input :email, :input_html => {:class => "medium"}, :hint => "is not shared with anybody" %>
+				<div class="clearfix string required">
+					<%= u.label :name, '<abbr title="required">*</abbr> Name'.html_safe, :class => "string required" %>
+					<div class="input">
+						<%= u.text_field :name, :class => "medium string required", :size => 30, "data-validate" => "true" %>
+						<span class="help-block">will not appear next to your video.</span>
+					</div>
+				</div>
+
+				<div class="clearfix string required">
+					<%= u.label :email, '<abbr title="required">*</abbr> Email'.html_safe, :class => "string required" %>
+					<div class="input">
+						<%= u.text_field :email, :class => "medium string required", :size => 30, "data-validate" => "true" %>
+						<span class="help-block">we don't share with anyone.</span>
+					</div>
+				</div>
 			
 				<div class="clearfix">
 					<div class="input">
 						<ul class="inputs-list">
 							<li>
-								<label for="video_user_terms">
-									<%= u.check_box :terms %>
+								<label for="user-terms">
+									<%= u.check_box :terms, :id => "user-terms" %>
 									<span>I understand and agree to the <a href="#">Terms and Conditions</a></span>
 								</label>
 							</li>

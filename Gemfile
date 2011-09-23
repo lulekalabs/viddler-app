@@ -36,8 +36,7 @@ end
 
 gem 'viddler-ruby'
 gem 'heroku'
-# gem "simple_form"
-gem 'simple_form', :git => 'git://github.com/plataformatec/simple_form.git'
-gem 'remotipart', '~> 1.0'
+gem 'simple_form'#, :git => 'git://github.com/plataformatec/simple_form.git'
 gem "client_side_validations"
+gem 'remotipart', '~> 1.0'
 # gem "friendly_id", "~> 4.0.0.beta8"
