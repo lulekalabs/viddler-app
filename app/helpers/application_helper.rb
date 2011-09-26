@@ -1,6 +1,6 @@
 module ApplicationHelper
   
-  def error_messages(target, wrap = true)
+  def error_messages(target, wrap = false)
     html = ""
     html += %(<div id="errorExplanation">) if wrap
     html += %(<p><b>Oh snap! You got an error!</b> Change the following <i>#{pluralize(target.errors.count, "error")}</i> and try again.</p>)
@@ -10,7 +10,7 @@ module ApplicationHelper
     end
     html += %(</ul>)
     html += %(</div>) if wrap
-    html
+    html.html_safe
   end
   alias_method :error_messages_for, :error_messages
 

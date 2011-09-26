@@ -115,8 +115,6 @@ clientSideValidations.formBuilders['SimpleForm::FormBuilder']['remove'] = functi
 function recordDone(username, user_video_number, video_id) {
 	var json = {video:{video_id: video_id, source: "webcam"}}
 	$.post('<%= app.videos_path %>', json);
-	// $('#videos').load('<%= app.list_videos_path %>');
-	// $(document).trigger("hide-popovers");
 }
 
 function recordStopped() {

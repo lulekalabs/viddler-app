@@ -25,6 +25,10 @@ class VideosController < ApplicationController
     end
   end
   
+  def edit
+    render :layout => !request.xhr?
+  end
+  
   def update
     @video.attributes = video_params.merge(:user => @user)
     @video.save and @video.user.save

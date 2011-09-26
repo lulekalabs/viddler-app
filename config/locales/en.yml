@@ -37,6 +37,7 @@ en:
   facebook: "Vote on my favorite coffee video %{title}"
   
   video_successfully_uploaded: "<b>Well done!</b> You successfully uploaded your video. It may take a minute or two before it will appear."
+  video_successfully_recorded: "<b>Well done!</b> You successfully recorded your video. It may take a minute or two before it will appear."
   video_upload_alert: "<b>Woopsi!</b> Your video did not upload correctly. Please double-check the correct video encoding and try again."
   video_upload_notice: "<b>Well done!</b> You successfully uploaded your video. It may take a minute or two before it will appear."
   edit_video_title: Edit Video
