@@ -61,7 +61,7 @@ class VideosController < ApplicationController
   end
   
   def load_videos
-    if true
+    if false
       @videos = Video.all
     else
       result = @viddler.get 'viddler.videos.getByUser', :per_page => 100

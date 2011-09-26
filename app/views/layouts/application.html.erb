@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:fb="https://www.facebook.com/2008/fbml">
   <head>
     <meta charset="utf-8">
-    <title>Coffee Recorder</title>
+    <title><%= page_title %></title>
     <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="author" content="Business Vision">
+		<meta property="og:title" content="<%= fb_title %>" />
+		<meta property="og:type" content="movie" />
+		<meta property="og:url" content="<%= url_for({}) %>" />
+		<meta property="og:image" content="<%= fb_thumbnail_url %>" />
+		<meta property="og:site_name" content="<%= t "site.name" %>" />
+		<meta property="fb:admins" content="722924084" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -15,7 +21,8 @@
 	  <%= stylesheet_link_tag "application" %>
 		<%= javascript_include_tag "application" %>
 	  <%= csrf_meta_tags %>
-		<script src="http://cdn-static.viddler.com/js/viddler.js" type="text/javascript"></script>
+	  <%= javascript_include_tag "//cdn-static.viddler.com/js/viddler.js" %>
+	  <%= javascript_include_tag "//platform.twitter.com/widgets.js" %>
 		<%= javascript_tag do %>
 			<% flash.each do |key, msg| %>
 				$.alert('<%= msg %>', '<%= key %>');
@@ -42,23 +49,23 @@
 			</div>
       <div class="fill">
         <div class="container">
-          <a class="brand" href="/">Coffee <span class="label important">Recorder</span></a>
+          <a class="brand" href="/"><%=raw t "topbar.brand" %></a>
           <ul class="nav">
             <li>
-							<a href="#about" data-controls-modal="modal-about" data-backdrop="static">About</a>
+							<a href="#about" data-controls-modal="modal-about" data-backdrop="static"><%=raw t "topbar.about" %></a>
 							<div id="modal-about" class="modal hide fade in">
 								<div class="modal-header">
 									<a href="#" class="close">×</a>
-									<h3>About Coffee Recorder</h3>
+									<h3><%=raw t "topbar.about" %> <%= t "site.name" %></h3>
 								</div>
 								<div class="modal-body">
-									<p>This is a prototype of a video recording and uploading app.</p>
-									<p>The recorder as well as the video player can be customized as <a href="http://www.viddler.com/" target="_blank">white-label solution</a>. Videos can be set as completely private, public, or configured according to a custom workflow.</p>
+									<p><%= t "site.name" %> is a simple prototype of a video recording and uploading app.</p>
+									<p>The recorder as well as the video player can be customized using <a href="http://www.viddler.com/" target="_blank">Viddler</a>. Videos can be set as completely private, public, or configured according to a custom workflow.</p>
 								</div>
 							</div>
 						</li>
             <li>
-							<%= mail_to "rubylabs@bvision.com", "Contact", :encode => "javascript" %>
+							<%= mail_to "rubylabs@bvision.com", t("topbar.contact"), :encode => "javascript" %>
 						</li>
           </ul>
         </div>
@@ -149,12 +156,41 @@
 			<ul id="videos" class="media-grid">
 				<li><p>Loading...<p></li>
 			</ul>
+			
 			<%= yield %>
       <footer>
-        <p>&copy; Business Vision 2011</p>
+        <p>
+					&copy; Business Vision 2011
+				</p>
+				<div class="share">
+					<div class="twitter-button">
+					  <a href="https://twitter.com/share?url=<%= root_url %>&amp;via=business_vision&amp;text=<%=u t("twitter", :title => "").strip %>" class="twitter-share-button">Tweet</a>
+					</div>
+					<div class="facebook-button">
+						<fb:like send="false" layout="button_count" width="250" show_faces="false" href="<%= root_url %>"></fb:like>
+					</div>
+				</div>
       </footer>
 
     </div> <!-- /container -->
+		<!-- facebook -->
+		<div id="fb-root"></div>
+		<%= javascript_tag do %>
+			window.fbAsyncInit = function() {
+				FB.init({
+					appId  : '145968922165089',
+					status : true,
+					cookie : true,
+					xfbml  : true
+				});
+			};
 
+			(function() {
+				var e = document.createElement('script');
+				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+				e.async = true;
+				document.getElementById('fb-root').appendChild(e);
+			}());
+		<% end %>
   </body>
 </html>

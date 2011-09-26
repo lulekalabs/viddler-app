@@ -14,7 +14,7 @@
 				<div class="clearfix string required">
 					<%= u.label :name, '<abbr title="required">*</abbr> Name'.html_safe, :class => "string required" %>
 					<div class="input">
-						<%= u.text_field :name, :class => "medium string required", :size => 30, "data-validate" => "true" %>
+						<%= u.text_field :name, :class => "large string required", :size => 30, "data-validate" => "true" %>
 						<span class="help-block">will not appear next to your video.</span>
 					</div>
 				</div>
@@ -22,7 +22,7 @@
 				<div class="clearfix string required">
 					<%= u.label :email, '<abbr title="required">*</abbr> Email'.html_safe, :class => "string required" %>
 					<div class="input">
-						<%= u.text_field :email, :class => "medium string required", :size => 30, "data-validate" => "true" %>
+						<%= u.text_field :email, :class => "large string required", :size => 30, "data-validate" => "true" %>
 						<span class="help-block">we don't share with anyone.</span>
 					</div>
 				</div>
@@ -50,9 +50,4 @@
 
 	</div>
 	<div class="clearfix"></div>
-</div>
-<div class="modal-footer">
-	<input type="submit" class="btn primary" value="Update">&nbsp;
-	<button type="reset" class="btn cancel">Cancel</button>
-	<%= yield :delete %>
 </div>

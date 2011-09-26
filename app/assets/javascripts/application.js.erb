@@ -72,6 +72,9 @@ $(document).bind("list-loaded", function(event) {
 		}
 		event.preventDefault();
 	});
+	
+	twttr.widgets.load();
+	FB.XFBML.parse();
 });
 
 jQuery.extend({

@@ -13,6 +13,7 @@
 	<% content_for :embed do %>
 	<p class="embed">
 		<%=raw video_embed_code(video.video_id, :player_type => 'simple', :width => width, :heigth => height) %>
+		<label>Recorded Video</label>
 	</p>
 	<% end %>
 
@@ -23,6 +24,13 @@
 	<%= simple_form_for @video, :url => video_path(@video), 
 		:html => {:method => :put, :id => "edit-form", :multipart => true, :class => "edit form-stacked"}, 
 			:remote => true, :validate => true do |f| %> 
+			
 		<%= render "form", :f => f %>
+		
+		<div class="modal-footer">
+			<input type="submit" class="btn primary" value="Publish">&nbsp;
+			<button type="reset" class="btn cancel">Cancel</button>
+			<%= yield :delete %>
+		</div>
 	<% end %>
 </div>

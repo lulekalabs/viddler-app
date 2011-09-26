@@ -81,16 +81,42 @@ form div.clearfix.error span.help-error {
 	color: #9D261D;
 }
 
-p.embed {
+form.edit p.embed {
 	text-align: left;
 }
 	
-.embed {
+form.edit .embed {
 	float: left;
 	width: 230px;
 }
 
-.fields {
+.embed label {
+	text-align: middle;
+	font-weight: bold;
+}
+
+form.edit .fields {
 	float: left;
 	width: 270px;
+}
+
+.modal .twitter-button, 
+.modal .facebook-button {
+	float: left;
+	margin-right: 5px;
+}
+
+footer .twitter-button, 
+footer .facebook-button {
+	float: left;
+}
+
+footer p {
+	width: 500px;
+	float: left;
+}
+
+footer .share {
+	float: left;
+	width: 440px;
 }
