@@ -38,15 +38,7 @@
 
   <body>
     <div class="topbar">
-			<div class="alert-message block-message error fade in hide">
-			  <a class="close" href="#">×</a>
-			  <p><strong>Holy guacamole!</strong> Best check yo self, you’re not looking too good.</p>
-				<ul>
-					<li>Duis mollis est non commodo luctus</li>
-					<li>Nisi erat porttitor ligula</li>
-					<li>Eget lacinia odio sem nec elit</li>
-				</ul>
-			</div>
+			<div class="alert-message block-message error fade in hide"></div>
       <div class="fill">
         <div class="container">
           <a class="brand" href="/"><%=raw t "topbar.brand" %></a>
@@ -89,7 +81,7 @@
 				<div id="modal-uploader" class="modal hide fade in">
 					<div class="modal-header">
 						<a href="#" class="close">×</a>
-						<h3>Video Upload</h3>
+						<h3><%= t "upload.title" %></h3>
 					</div>
 					<%= form_tag video_upload_url, :id => "upload-form", :multipart => true do |f| %> 
 						<%= hidden_field_tag :uploadtoken, video_upload_token %>
@@ -98,18 +90,18 @@
 							<p>
 								<fieldset>
 									<div class="clearfix file required">
-										<label for="file"><abbr title="required">*</abbr> Video file</label>
+										<label for="file"><abbr title="required">*</abbr> <%= t "activerecord.attributes.video.file" %></label>
 										<div class="input">
 											<%= file_field_tag :file, "data-validate" => "true" %>
-											<span class="help-block">Video footage no more than 1 minute in length.</span>
+											<span class="help-block"><%= t "activerecord.hints.video.file" %></span>
 										</div>
 									</div>
 								</fieldset>	
 							</p>
 						</div>
 						<div class="modal-footer">
-							<input type="submit" class="btn primary" value="Upload">&nbsp;
-							<button type="reset" class="btn cancel">Cancel</button>
+							<input type="submit" class="btn primary" value="<%= t "upload.submit" %>">&nbsp;
+							<button type="reset" class="btn cancel"><%= t "upload.reset" %></button>
 						</div>
 					<% end %>
 				</div>
@@ -118,7 +110,7 @@
 				<div id="modal-recorder" class="modal hide fade in">
 					<div class="modal-header">
 						<a href="#" class="close">×</a>
-						<h3>Live Recorder</h3>
+						<h3><%= t "record.title" %></h3>
 					</div>
 					<div class="modal-body">
 						<p>
@@ -137,18 +129,6 @@
 								<param name="flashvars" value="<%= flashvars %>" /> 
 								<embed src="http://cdn-static.viddler.com/flash/recorder.swf" quality="high" scale="noScale" bgcolor="#000000" allowScriptAccess="always" allowNetworking="all" width="<%= width %>" height="<%= height %>" name="viddler_recorder" flashvars="<%= flashvars %>" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
 							</object>
-							<script>
-								function recordDone(username, user_video_number, video_id) {
-									var json = {video:{video_id: video_id, source: "webcam"}}
-									$.post('<%= videos_path %>', json);
-									// $('#videos').load('<%= list_videos_path %>');
-									// $(document).trigger("hide-popovers");
-								}
-
-								function recordStopped() {
-									$(document).trigger("hide-popovers");
-								}
-							</script>
 						</p>
 					</div>
 				</div>
@@ -159,6 +139,7 @@
 			</ul>
 			
 			<%= yield %>
+			
       <footer>
         <p>
 					&copy; <%= t("site.company") %> <%= Time.now.year %>

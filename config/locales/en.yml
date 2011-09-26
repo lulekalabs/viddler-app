@@ -25,6 +25,14 @@ en:
     two: 'The recorder as well as the video player is realized using <a href="http://www.viddler.com/" target="_blank">Viddler</a>. Videos can be set as completely private, public, or configured according to a custom workflow.'
     three: 'The app is done using <a href="http://rubyonrails.org/" target="_blank">Rails 3.1</a> and friends: 										<a href="http://heroku.com" target="_blank">Heroku</a>, <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>, <a href="https://github.com/plataformatec/simple_form" target="_blank">Simple Form</a>, <a href="https://github.com/viddler/viddler-ruby" target="_blank">Viddler</a>, <a href="https://github.com/bcardarella/client_side_validations" target="_blank">Client Side Validations</a>, <a href="https://github.com/leppert/remotipart" target="_blank">Remotipart</a>.'
     
+  upload:
+    title: "Video Upload"
+    submit: "Upload"
+    reset: "Cancel"
+    
+  record:
+    title: Live Recorder
+    
   twitter: "Vote on my favorite coffee video %{title}"
   facebook: "Vote on my favorite coffee video %{title}"
   
@@ -32,3 +40,13 @@ en:
   video_upload_alert: "<b>Woopsi!</b> Your video did not upload correctly. Please double-check the correct video encoding and try again."
   video_upload_notice: "<b>Well done!</b> You successfully uploaded your video. It may take a minute or two before it will appear."
   edit_video_title: Edit Video
+  video_not_found: "<b>Woopsi!</b> The video (%{id}) could not be found."
+  
+  activerecord:
+    attributes:
+      video:
+        file: "Video file"
+    hints:
+      video:
+        file: "Video footage no more than 1 minute in length."
+        

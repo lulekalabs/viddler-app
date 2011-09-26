@@ -2,7 +2,7 @@ class VideosController < ApplicationController
   before_filter :get_session
   before_filter :get_record_token
   before_filter :prepare_upload
-  before_filter :load_video, :only => [:show, :edit, :update]
+  before_filter :load_video, :only => [:show, :edit, :update, :delete]
   before_filter :build_user, :only => [:edit, :update]
   before_filter :build_video, :only => [:new, :index, :create, :uploaded]
   
@@ -93,7 +93,11 @@ class VideosController < ApplicationController
   end
   
   def load_video
-    @video = Video.find_by_video_id(params[:id])
-    @user = @video.user
+    if @video = Video.find_by_video_id(params[:id])
+      @user = @video.user
+    else
+      render :template => "videos/not_found"
+      return false
+    end
   end
 end
