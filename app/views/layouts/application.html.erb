@@ -59,8 +59,9 @@
 									<h3><%=raw t "topbar.about" %> <%= t "site.name" %></h3>
 								</div>
 								<div class="modal-body">
-									<p><%= t "site.name" %> is a simple prototype of a video recording and uploading app.</p>
-									<p>The recorder as well as the video player can be customized using <a href="http://www.viddler.com/" target="_blank">Viddler</a>. Videos can be set as completely private, public, or configured according to a custom workflow.</p>
+									<p><%=raw t "about.one" %></p>
+									<p><%=raw t "about.two" %></p>
+									<p><%=raw t "about.three" %></p>
 								</div>
 							</div>
 						</li>
@@ -76,12 +77,12 @@
 
       <!-- Main hero unit for a primary marketing message or call to action -->
       <div class="hero-unit">
-        <h1>Broadcast Coffee</h1>
-        <p>Tell us what's your favorite coffee flavor and you will be featured in the video gallery.</p>
+        <h1><%= t "home.title" %></h1>
+        <p><%= t "home.description" %></p>
         <p>
-					<a id="upload-button" class="btn primary large" data-controls-modal="modal-uploader" data-backdrop="static">Upload your own Video</a>
-					&nbsp;or&nbsp;
-					<a id="record-button" class="btn secondary large" data-controls-modal="modal-recorder" data-backdrop="static">Use Webcam</a>
+					<a id="upload-button" class="btn primary large" data-controls-modal="modal-uploader" data-backdrop="static"><%= t "home.upload" %></a>
+					&nbsp;<%= t "home.or" %>&nbsp;
+					<a id="record-button" class="btn secondary large" data-controls-modal="modal-recorder" data-backdrop="static"><%= t "home.webcam" %></a>
 				</p>
 
 				<!-- upload modal -->
@@ -152,15 +153,15 @@
 					</div>
 				</div>
       </div>
-      <h2>Latest Videos</h2>
+      <h2><%= t "home.list_header" %></h2>
 			<ul id="videos" class="media-grid">
-				<li><p>Loading...<p></li>
+				<li><p><%= t "home.list_loading" %><p></li>
 			</ul>
 			
 			<%= yield %>
       <footer>
         <p>
-					&copy; Business Vision 2011
+					&copy; <%= t("site.company") %> <%= Time.now.year %>
 				</p>
 				<div class="share">
 					<div class="twitter-button">

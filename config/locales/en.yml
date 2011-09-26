@@ -4,11 +4,26 @@
 en:
   site:
     name: Coffee Recorder
+    company: Business Vision S.A.
 
   topbar:
     brand: 'Coffee <span class="label important">Recorder</span>'
     about: "About"
     contact: "Contact"
+
+  home:
+    title: "Broadcast Coffee"
+    description: "Tell us what's your favorite coffee flavor and you will be featured in the video gallery."
+    upload: "Upload your own Video"
+    webcam: "Use Webcam"
+    or: "or"
+    list_header: "Latest Videos"
+    list_loading: "Loading..."
+    
+  about:
+    one: "Coffee Recorder is a simple video recording and uploading app."
+    two: 'The recorder as well as the video player is realized using <a href="http://www.viddler.com/" target="_blank">Viddler</a>. Videos can be set as completely private, public, or configured according to a custom workflow.'
+    three: 'The app is done using <a href="http://rubyonrails.org/" target="_blank">Rails 3.1</a> and friends: 										<a href="http://heroku.com" target="_blank">Heroku</a>, <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>, <a href="https://github.com/plataformatec/simple_form" target="_blank">Simple Form</a>, <a href="https://github.com/viddler/viddler-ruby" target="_blank">Viddler</a>, <a href="https://github.com/bcardarella/client_side_validations" target="_blank">Client Side Validations</a>, <a href="https://github.com/leppert/remotipart" target="_blank">Remotipart</a>.'
     
   twitter: "Vote on my favorite coffee video %{title}"
   facebook: "Vote on my favorite coffee video %{title}"
