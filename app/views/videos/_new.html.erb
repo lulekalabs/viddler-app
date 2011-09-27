@@ -1,5 +1,60 @@
-<%= simple_form_for @video, :url => videos_path, 
-	:html => {:id => "upload-form", :multipart => true}, 
-		:remote => true, :validate => true do |f| %> 
-	<%= render "form", :f => f %>
+<%
+	source ||= "upload"
+%>
+<% if source == "upload" %>
+<div id="modal-uploader" class="modal hide fade in">
+	<div class="modal-header">
+		<a href="#" class="close">×</a>
+		<h3><%= t ".title" %></h3>
+	</div>
+	<%= form_tag video_upload_url, :id => "upload-form", :multipart => true do |f| %> 
+		<%= hidden_field_tag :uploadtoken, video_upload_token %>
+		<%= hidden_field_tag :callback, uploaded_videos_url %>
+		<div class="modal-body">
+			<p>
+				<fieldset>
+					<div class="clearfix file required">
+						<label for="file"><abbr title="required">*</abbr> <%= t(".file.label").html_safe %></label>
+						<div class="input">
+							<%= file_field_tag :file, "data-validate" => "true" %>
+							<span class="help-block"><%= t(".file.hint").html_safe %></span>
+						</div>
+					</div>
+				</fieldset>	
+			</p>
+		</div>
+		<div class="modal-footer">
+			<input type="submit" class="btn primary" value="<%= t ".submit" %>">&nbsp;
+			<button type="reset" class="btn cancel"><%= t ".reset" %></button>
+		</div>
+	<% end %>
+</div>
+
+<% else %>
+<%
+	width = 525
+	height = 436
+	flashvars = "recQuality=M&maxlength=20&fake=1&recordToken=#{@record_token}"
+%>
+<div id="modal-recorder" class="modal hide fade in">
+	<div class="modal-header">
+		<a href="#" class="close">×</a>
+		<h3><%= t "record.title" %></h3>
+	</div>
+	<div class="modal-body">
+		<p>
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"  codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="<%= width %>" height="<%= height %>" id="viddler_recorder" align="middle"> 
+				<param name="allowScriptAccess" value="always" /> 
+				<param name="allowNetworking" value="all" /> 
+				<param name="movie" value="http://cdn-static.viddler.com/flash/recorder.swf" /> 
+				<param name="quality" value="high" /> 
+				<param name="scale" value="noScale"> 
+				<param name="bgcolor" value="#000000" /> 
+				<param name="flashvars" value="<%= flashvars %>" /> 
+				<embed src="http://cdn-static.viddler.com/flash/recorder.swf" quality="high" scale="noScale" bgcolor="#000000" allowScriptAccess="always" allowNetworking="all" width="<%= width %>" height="<%= height %>" name="viddler_recorder" flashvars="<%= flashvars %>" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object>
+		</p>
+	</div>
+</div>
+
 <% end %>

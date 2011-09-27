@@ -25,29 +25,46 @@ en:
     two: 'The recorder as well as the video player is realized using <a href="http://www.viddler.com/" target="_blank">Viddler</a>. Videos can be set as completely private, public, or configured according to a custom workflow.'
     three: 'The app is done using <a href="http://rubyonrails.org/" target="_blank">Rails 3.1</a> and friends: 										<a href="http://heroku.com" target="_blank">Heroku</a>, <a href="http://twitter.github.com/bootstrap/" target="_blank">Twitter Bootstrap</a>, <a href="https://github.com/plataformatec/simple_form" target="_blank">Simple Form</a>, <a href="https://github.com/viddler/viddler-ruby" target="_blank">Viddler</a>, <a href="https://github.com/bcardarella/client_side_validations" target="_blank">Client Side Validations</a>, <a href="https://github.com/leppert/remotipart" target="_blank">Remotipart</a>.'
     
-  upload:
-    title: "Video Upload"
-    submit: "Upload"
-    reset: "Cancel"
-    
   record:
     title: Live Recorder
     
   twitter: "Vote on my favorite coffee video %{title}"
   facebook: "Vote on my favorite coffee video %{title}"
   
-  video_successfully_uploaded: "<b>Well done!</b> You successfully uploaded your video. It may take a minute or two before it will appear."
-  video_successfully_recorded: "<b>Well done!</b> You successfully recorded your video. It may take a minute or two before it will appear."
-  video_upload_alert: "<b>Woopsi!</b> Your video did not upload correctly. Please double-check the correct video encoding and try again."
-  video_upload_notice: "<b>Well done!</b> You successfully uploaded your video. It may take a minute or two before it will appear."
-  edit_video_title: Edit Video
+  upload_success: "<b>Well done!</b> The upload worked out great. Before we're done we need some last details."
+  recording_success: "<b>Well done!</b> The recording was a hit. Before we're done we need some last details."
+  upload_error: "<b>Bummer!</b> Something went wrong with your upload. We're sorry, but please double-check your video format and try again."
+  update_success: "<b>Awesome!</b> Thanks so much for your video submission. It will be available right after we've blessed it. Check back with us soon in a minute or two and start sharing with your friends."
   video_not_found: "<b>Woopsi!</b> The video (%{id}) could not be found."
+
+  videos:
+    new:
+      title: "Upload Video"
+      submit: "Upload"
+      reset: "Cancel"
+      file:
+        label: "Video file"
+        hint: "Video footage no more than 1 minute in length."
+        
+    edit:
+      title: Edit Video
+      uploaded_video: "Uploaded Video"
+      recorded_video: "Webcam Video"
+      submit: "Update"
+      reset: "Cancel"
+      delete: "Remove"
+    form:
+      notice: "<strong>Important:</strong> Do not upload any TV shows, music videos, music concerts, or commercials without permission unless they consist entirely of content you created yourself."
+      terms: 'I understand and agree to the <a href="#">Terms and Conditions</a>'
+      title:
+        label: Title
+        hint: up to 140 characters.
+      name:
+        label: Name
+        hint: will not appear next to your video.
+      email:
+        label: Email
+        hint: we don't share with anyone.
   
   activerecord:
     attributes:
-      video:
-        file: "Video file"
-    hints:
-      video:
-        file: "Video footage no more than 1 minute in length."
-        

@@ -1,8 +1,10 @@
 class VideosController < ApplicationController
-  before_filter :get_session
+  respond_to :html, :js
+  before_filter :viddler_authenticate
   before_filter :get_record_token
   before_filter :prepare_upload
-  before_filter :load_video, :only => [:show, :edit, :update, :delete]
+  before_filter :find_video, :only => [:show, :edit, :update, :delete]
+  before_filter :find_videos, :only => :list
   before_filter :build_user, :only => [:edit, :update]
   before_filter :build_video, :only => [:new, :index, :create, :uploaded]
   
@@ -11,30 +13,18 @@ class VideosController < ApplicationController
   end
 
   def list
-    load_videos and render :layout => false
-  end
-  
-  def new
-    render :layout => !request.xhr?
+    render :layout => false
   end
   
   def create
     @video.save
-    respond_to do |format|
-      format.js
-    end
-  end
-  
-  def edit
-    render :layout => !request.xhr?
+    respond_with(@video, :layout => !request.xhr?)
   end
   
   def update
     @video.attributes = video_params.merge(:user => @user)
     @video.save and @video.user.save
-    respond_to do |format|
-      format.js
-    end
+    respond_with @video
   end
   
   def delete
@@ -42,13 +32,13 @@ class VideosController < ApplicationController
       :video_id => params[:id]
     if result['success']
       Video.destroy_all(:video_id => params[:id])
-      load_videos and render :template => "videos/list", :layout => false
+      find_videos and render :template => "videos/list", :layout => false
     else
       render :status => :unprocessable_entity
     end
   end
   
-  # callback viddler
+  # viddler callback after file upload
   def uploaded
     @video.video_id = params[:videoid]
     if @video.save
@@ -64,7 +54,7 @@ class VideosController < ApplicationController
     @record_token = @viddler.session['record_token']
   end
   
-  def load_videos
+  def find_videos
     if false
       @videos = Video.all
     else
@@ -93,10 +83,10 @@ class VideosController < ApplicationController
   end
   
   def build_video
-    @video = Video.instance_for({:source => "upload", :session => @session, :viddler => @viddler}.merge(video_params.merge(:user => @user)))
+    @video = Video.instance_for({:source => "upload", :session => @session}.merge(video_params.merge(:user => @user)))
   end
   
-  def load_video
+  def find_video
     if @video = Video.find_by_video_id(params[:id])
       @user = @video.user
     else

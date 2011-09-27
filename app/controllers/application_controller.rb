@@ -5,9 +5,10 @@ class ApplicationController < ActionController::Base
   
   protected
   
-  def get_session
+  def viddler_authenticate
     @viddler = Viddler::Client.new(ViddlerApp::Viddler.api_key)
     @viddler.xauthenticate! ViddlerApp::Viddler.user, ViddlerApp::Viddler.password, :get_record_token => "1"
+    Video.viddler = @viddler
   end
   
   def find_or_store_session

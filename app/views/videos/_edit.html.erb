@@ -1,5 +1,5 @@
 <% 
-	video  ||= nil 
+	video  ||= @video
 	width  ||= 200
 	height ||= 125
 	dom_id ||= edit_video_dom_id(video)
@@ -7,18 +7,14 @@
 <div id="<%= dom_id %>" class="modal hide fade in video-popup">
 	<div class="modal-header">
 		<a href="#" class="close">×</a>
-		<h3><%= I18n.t(:edit_video_title) %></h3>
+		<h3><%= t(".title") %></h3>
 	</div>
 	
 	<% content_for :embed do %>
 	<p class="embed">
 		<%=raw video_embed_code(video.video_id, :player_type => 'simple', :width => width, :heigth => height) %>
-		<label>Recorded Video</label>
+		<label><%= video.webcam? ? t(".recorded_video") : t(".uploaded_video") %></label>
 	</p>
-	<% end %>
-
-	<% content_for :delete do %>
-	<a href="<%= delete_video_path(video.video_id) %>" class="btn secondary video-delete" rel="nofollow" data-content="<%= video.video_id %>">Delete</a>
 	<% end %>
 
 	<%= simple_form_for @video, :url => video_path(@video), 
@@ -28,9 +24,9 @@
 		<%= render "form", :f => f %>
 		
 		<div class="modal-footer">
-			<input type="submit" class="btn primary" value="Publish">&nbsp;
-			<button type="reset" class="btn cancel">Cancel</button>
-			<%= yield :delete %>
+			<input type="submit" class="btn primary" value="<%= t ".submit" %>">&nbsp;
+			<button type="reset" class="btn cancel"><%= t ".reset" %></button>
+			<a href="<%= delete_video_path(video.video_id) %>" class="btn secondary video-delete" rel="nofollow" data-content="<%= video.video_id %>"><%= t ".delete" %></a>
 		</div>
 	<% end %>
 </div>

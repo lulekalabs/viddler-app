@@ -1,0 +1,5 @@
+$("#<%= edit_video_dom_id %>").remove();
+$("#<%= edit_video_link_dom_id %>").remove();
+$("body").append("<%=j render("edit").html_safe %>");
+$("body").append("<%=j edit_video_link %>");
+$("#<%= edit_video_link_dom_id %>").trigger("click");

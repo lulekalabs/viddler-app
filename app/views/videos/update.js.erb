@@ -1,7 +1,9 @@
-<% if @video.valid? %>
-	$(document).trigger("hide-popovers");
+<% if @video.errors.any? %>
+	$.alert("<%=j error_messages_for(@video, false) %>", "error");
+	$("#<%= edit_video_dom_id %>").html("<%=j render('edit').html_safe %>");
 <% else %>
-	$.alert('<%= error_messages_for(@video, false).html_safe %>', 'error');
-	$("#edit-modal-video-<%= @video.video_id %>").html(render("edit"));
+	$.alert("<%=j t(:update_success).html_safe %>", "notice");
+	$(document).trigger("hide-popovers");
+	$(document).trigger("reset-form");
 <% end %>
 
