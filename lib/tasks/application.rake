@@ -1,8 +1,6 @@
 namespace :videos do
   task :delete => :environment do
-    @viddler = Viddler::Client.new(ViddlerApp::Viddler.api_key)
-    @viddler.xauthenticate! ViddlerApp::Viddler.user, ViddlerApp::Viddler.password, :get_record_token => "1"
-    Video.viddler = @viddler
+    @viddler = Video::Viddler.authenticate!
 
     # Remove through model instances
     Video.all.each do |video|

@@ -3,10 +3,32 @@
 <% else %>
 	<% @videos.each do |video| %>
 	<li>
-		<a data-controls-modal="modal-video-<%= video.video_id %>" data-backdrop="static" rel="popover" data-content="<%= video.description %>" data-original-title="<%= video.title %>">
-			<%= image_tag video['thumbnail_url'], :size => "210x150", :alt => video['description'] %>
+		<% if @session == video.session && @session.user == video.user %>
+			<% @delete_button = capture do %>
+				<%= delete_video_link(video) %>
+			<% end %>
+			<%
+				partial = "show"
+				dom_id = video_dom_id(video)
+			%>
+		<% elsif @session == video.session && !video.user %>
+			<% @delete_button = capture do %>
+				<%= delete_video_link(video) %>
+			<% end %>
+			<%
+				partial = "show"
+				dom_id = video_dom_id(video)
+			%>
+		<% else %>
+			<%
+				partial = "show"
+				dom_id = video_dom_id(video)
+			%>
+		<% end %>
+		<%= render partial, :video => video %>
+		<a data-controls-modal="<%= dom_id %>" data-backdrop="static" rel="popover" data-content="<%= video.description %>" data-original-title="<%= video.title %>">
+			<%= image_tag video.thumbnail_url, :size => "210x150", :alt => video.description %>
 		</a>
-		<%= render "show", :video => video %>
 	</li>
 	<% end %>
 	<script>

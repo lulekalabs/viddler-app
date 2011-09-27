@@ -24,9 +24,11 @@
 	  <%= javascript_include_tag "//cdn-static.viddler.com/js/viddler.js" %>
 	  <%= javascript_include_tag "//platform.twitter.com/widgets.js" %>
 		<%= javascript_tag do %>
-			<% flash.each do |key, msg| %>
-				$.alert('<%= msg %>', '<%= key %>');
-			<% end %>
+			$(function() {
+				<% flash.each do |key, msg| %>
+					$.alert('<%= msg %>', '<%= key %>');
+				<% end %>
+			});
 		<% end %>
 		
     <!-- Le fav and touch icons -->

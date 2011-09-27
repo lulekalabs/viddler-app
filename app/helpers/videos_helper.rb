@@ -29,4 +29,8 @@ module VideosHelper
     "edit-modal-video-#{video.video_id}-link"
   end
   
+  def delete_video_link(video = @video)
+    %(<a href="#{delete_video_path(video.video_id)}" class="btn secondary video-delete" rel="nofollow" data-content="#{video.video_id}">#{t ".delete"}</a>).html_safe
+  end
+  
 end

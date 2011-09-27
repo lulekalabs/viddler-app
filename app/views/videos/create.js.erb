@@ -4,11 +4,16 @@ $(document).trigger("hide-popovers");
 <% else %>
 	<% if @video.upload? %>
 		$.alert("<%=j t(:upload_success).html_safe %>", "notice");
+		<% flash[:notice] = t(:upload_success).html_safe %>
 	<% elsif @video.webcam? %>
 		$.alert("<%=j t(:recording_success).html_safe %>", "notice");
+		<% flash[:notice] = t(:recording_success).html_safe %>
 	<% end %>
+	<% if false %>
 	$.get("<%= edit_video_path(@video) %>", {}, function() {
 		window.eval(data.responseText);
 	}, "script");
-	<% puts "** #{edit_video_path(@video)}"%>
+	<% else %>
+		window.location = '<%= edit_video_url(@video) %>';
+	<% end %>
 <% end %>

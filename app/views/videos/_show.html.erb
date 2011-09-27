@@ -21,5 +21,7 @@
 		<div class="facebook-button">
 			<fb:like send="false" layout="button_count" width="250" show_faces="false" href="<%= video_url(video) %>"></fb:like>
 		</div>
+		<%= @delete_button %>
+		<% @delete_button = nil %>
 	</div>
 </div>

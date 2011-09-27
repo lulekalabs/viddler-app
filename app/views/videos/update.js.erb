@@ -2,8 +2,8 @@
 	$.alert("<%=j error_messages_for(@video, false) %>", "error");
 	$("#<%= edit_video_dom_id %>").html("<%=j render('edit').html_safe %>");
 <% else %>
-	$.alert("<%=j t(:update_success).html_safe %>", "notice");
 	$(document).trigger("hide-popovers");
-	$(document).trigger("reset-form");
+	$.alert("<%=j t(:update_success).html_safe %>", "notice");
+	window.location = '<%= video_url(@video) %>';
 <% end %>
 

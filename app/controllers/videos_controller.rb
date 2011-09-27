@@ -17,6 +17,7 @@ class VideosController < ApplicationController
   end
   
   def create
+    @video.sync_attributes!
     @video.save
     respond_with(@video, :layout => !request.xhr?)
   end
@@ -41,10 +42,11 @@ class VideosController < ApplicationController
   # viddler callback after file upload
   def uploaded
     @video.video_id = params[:videoid]
+    @video.sync_attributes!
     if @video.save
-      redirect_to edit_video_path(@video), :notice => I18n.t(:video_upload_success)
+      redirect_to edit_video_path(@video), :notice => I18n.t(:upload_success)
     else
-      redirect_to "/", :alert => I18n.t(:video_upload_error)
+      redirect_to "/", :alert => I18n.t(:upload_error)
     end
   end
   
@@ -55,17 +57,7 @@ class VideosController < ApplicationController
   end
   
   def find_videos
-    if false
-      @videos = Video.all
-    else
-      result = @viddler.get 'viddler.videos.getByUser', :per_page => 100
-      @videos = []
-      result['list_result']['video_list'].each do |video|
-        @videos << Video.new(:video_id => video['id'], :title => video['title'], :description => video['description'],
-          :url => video['url'], :thumbnail_url => video['thumbnail_url'])
-      end
-      @videos
-    end
+    @videos = @session.videos
   end
 
   def video_params
