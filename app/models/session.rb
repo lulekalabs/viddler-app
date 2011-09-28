@@ -4,10 +4,10 @@ class Session < ActiveRecord::Base
   
   def videos
     if true
-      Video.published.where("videos.user_id IS NOT NULL OR videos.session_id IS ?", self.id)
+      Video.published.where("videos.user_id IS NOT NULL OR videos.session_id = ?", self.id)
     else
       vd_videos = Video::Viddler.hashed_videos
-      db_videos = Video.published.where("videos.user_id IS NOT NULL OR videos.session_id IS ?", self.id)
+      db_videos = Video.published.where("videos.user_id IS NOT NULL OR videos.session_id = ?", self.id)
       db_videos.each do |db_video|
         if vd_video = vd_videos[db_video.id]
           db_video.name = db_video.name || vd_video.name
