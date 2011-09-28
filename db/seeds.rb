@@ -1,14 +1,6 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
-@viddler = Viddler::Client.new(ViddlerApp::Viddler.api_key)
-@viddler.xauthenticate! ViddlerApp::Viddler.user, ViddlerApp::Viddler.password, :get_record_token => "1"
-result = @viddler.get 'viddler.videos.getByUser', :per_page => 100
-result['list_result']['video_list'].each do |element|
+# Import pre-existing viddler videos into the database
+@viddler = Video::Viddler.authenticate!
+Video::Viddler.videos.each do |element|
   v = Video.find_or_initialize_by_video_id(element['id'])
   v.title = element['title']
   v.description = element['description']
@@ -17,3 +9,12 @@ result['list_result']['video_list'].each do |element|
   puts "video #{v.video_id} #{v.new_record? ? 'created' : 'updated'}..."
   v.save!
 end
+
+# Re-slug
+Video.all.each {|v| v.save!}
+
+# Create a default admin user
+admin = AdminUser.find_or_create_by_email 'manager@example.com'
+admin.password = 'sanfran415:paragon'
+admin.password_confirmation = 'sanfran415:paragon'
+admin.save!

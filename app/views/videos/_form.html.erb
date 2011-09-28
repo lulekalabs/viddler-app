@@ -9,8 +9,7 @@
 					<span class="help-block"><%=raw t ".title.hint" %></span>
 				</div>
 			</div>
-			
-			<%= f.fields_for @user do |u| %>
+			<%= f.fields_for f.object.user || User.new do |u| %>
 				<div class="clearfix string required">
 					<%= u.label :name, "<abbr title=\"required\">*</abbr> #{raw t ".name.label"}".html_safe, :class => "string required" %>
 					<div class="input">

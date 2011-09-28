@@ -9,8 +9,12 @@ class Video < ActiveRecord::Base
 
   accepts_nested_attributes_for :user
 
+  extend FriendlyId
+  friendly_id :video_id, :use => :slugged
+
   scope :published, where("published_at IS NOT NULL")
   scope :authenticated, where("user_id IS NOT NULL")
+  scope :recent, order("created_at desc").limit(10)
 
   after_destroy :delete_video
 
@@ -56,10 +60,6 @@ class Video < ActiveRecord::Base
 
   def upload?
     self.source == 'upload'
-  end
-  
-  def to_param
-    self.video_id
   end
   
   def viddler

@@ -7,6 +7,7 @@ class VideosController < ApplicationController
   before_filter :find_videos, :only => :list
   before_filter :build_user, :only => [:edit, :update]
   before_filter :build_video, :only => [:new, :index, :create, :uploaded]
+  after_filter :update_session, :only => :update
   
   def index
     # nothing to do here
@@ -86,4 +87,11 @@ class VideosController < ApplicationController
       return false
     end
   end
+  
+  def update_session
+    if @session == @video.session && @video.user && @video.user.errors.blank?
+      @session.update_attribute(:user, @video.user)
+    end
+  end
+  
 end
