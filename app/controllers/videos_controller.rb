@@ -4,6 +4,7 @@ class VideosController < ApplicationController
   before_filter :get_record_token
   before_filter :prepare_upload
   before_filter :find_video, :only => [:show, :edit, :update, :delete]
+  before_filter :can_update, :only => [:edit, :update]
   before_filter :find_videos, :only => :list
   before_filter :build_user, :only => [:edit, :update]
   before_filter :build_video, :only => [:new, :index, :create, :uploaded]
@@ -92,6 +93,10 @@ class VideosController < ApplicationController
     if @session == @video.session && @video.user && @video.user.errors.blank?
       @session.update_attribute(:user, @video.user)
     end
+  end
+
+  def can_update
+    redirect_to video_path(@video), :status => :moved_permanently if @video && @video.authenticated?
   end
   
 end
