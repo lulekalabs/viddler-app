@@ -38,6 +38,8 @@ en:
   video_not_found: "<b>Woopsi!</b> The video (%{id}) could not be found."
 
   videos:
+    uploaded_video: "Uploaded Video"
+    recorded_video: "Webcam Video"
     new:
       title: "Upload Video"
       submit: "Upload"
@@ -50,8 +52,6 @@ en:
       delete: "Remove"
     edit:
       title: Edit Video
-      uploaded_video: "Uploaded Video"
-      recorded_video: "Webcam Video"
       submit: "Update"
       reset: "Cancel"
       delete: "Remove"

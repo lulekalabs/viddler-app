@@ -1,0 +1,9 @@
+<%
+	width ||= 240
+	height ||= 160
+%>
+<p></p>
+<p>
+	<%= video_embed_code(resource.video_id, 
+		:player_type => 'simple', :width => width, :heigth => height) %>
+</p>

@@ -1,18 +1,29 @@
 ActiveAdmin::Dashboards.build do
 
-  section "Recent Videos" do
-    ul do
-      Video.recent(5).collect do |video|
-        li link_to(video.title, admin_video_path(video))
+  section "Recent Submissions" do
+    table_for Video.where(:published_at => nil).recent(10) do |t|
+      column(:thumbnail) do |video|
+        link_to(image_tag(video.thumbnail_url, :size => "57x43", :alt => video.title, :title => video.title), [:admin, video])
       end
+      t.column("Status") {|video| video_status_tag(video)}
+    end
+  end
+
+  section "Recently Published" do
+    table_for Video.published.recent(10) do |t|
+      column(:thumbnail) do |video|
+        link_to(image_tag(video.thumbnail_url, :size => "57x43", :alt => video.title, :title => video.title), [:admin, video])
+      end
+      t.column("Status") {|video| video_status_tag(video)}
     end
   end
 
   section "Recent Users" do
-    ul do
-      User.recent(5).collect do |user|
-        li link_to(user.name, admin_user_path(user))
+    table_for User.recent(10) do |t|
+      column(:name) do |user|
+        link_to(user.name, [:admin, user])
       end
+      t.column :email
     end
   end
   

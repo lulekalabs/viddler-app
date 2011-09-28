@@ -25,5 +25,10 @@ module ApplicationHelper
   def fb_thumbnail_url
     @video ? @video.thumbnail_url : ""
   end
-  
+
+  def video_embed_code(video_id, options = {})
+    result = Video::Viddler.session.get('viddler.videos.getEmbedCode', {:video_id => video_id}.merge(options))
+    result['video']['embed_code'].html_safe
+  end
+
 end

@@ -13,7 +13,7 @@
 	<% content_for :embed do %>
 	<p class="embed">
 		<%=raw video_embed_code(video.video_id, :player_type => 'simple', :width => width, :heigth => height) %>
-		<label><%= video.webcam? ? t(".recorded_video") : t(".uploaded_video") %></label>
+		<label><%= video.human_source_name %></label>
 	</p>
 	<% end %>
 

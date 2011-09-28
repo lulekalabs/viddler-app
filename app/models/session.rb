@@ -3,17 +3,21 @@ class Session < ActiveRecord::Base
   validates :session_id, :uniqueness => {:case_sensitive => false}
   
   def videos
-    vd_videos = Video::Viddler.hashed_videos
-    db_videos = Video.where("videos.user_id IS NOT NULL OR videos.session_id IS ?", self.id)
-    db_videos.each do |db_video|
-      if vd_video = vd_videos[db_video.id]
-        db_video.name = db_video.name || vd_video.name
-        db_video.description = db_video.description || vd_video.description
-        db_video.thumbnail_url = vd_video.thumbnail_url# || db_video.thumbnail_url
-        db_video.url = vd_video.url || db_video.url
+    if true
+      Video.published.where("videos.user_id IS NOT NULL OR videos.session_id IS ?", self.id)
+    else
+      vd_videos = Video::Viddler.hashed_videos
+      db_videos = Video.published.where("videos.user_id IS NOT NULL OR videos.session_id IS ?", self.id)
+      db_videos.each do |db_video|
+        if vd_video = vd_videos[db_video.id]
+          db_video.name = db_video.name || vd_video.name
+          db_video.description = db_video.description || vd_video.description
+          db_video.thumbnail_url = vd_video.thumbnail_url# || db_video.thumbnail_url
+          db_video.url = vd_video.url || db_video.url
+        end
       end
+      db_videos
     end
-    db_videos
   end
   
 end

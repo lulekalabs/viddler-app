@@ -13,8 +13,9 @@ class Video < ActiveRecord::Base
   friendly_id :video_id, :use => :slugged
 
   scope :published, where("published_at IS NOT NULL")
+  scope :unpublished, where("published_at IS NULL AND user_id IS NOT NULL")
   scope :authenticated, where("user_id IS NOT NULL")
-  scope :recent, order("created_at desc").limit(10)
+  scope :recent, order("created_at desc")
 
   after_destroy :delete_video
 
@@ -23,8 +24,14 @@ class Video < ActiveRecord::Base
     class << self
       
       def authenticate!
-        @@session = ::Viddler::Client.new(::ViddlerApp::Viddler.api_key)
-        @@session.xauthenticate! ::ViddlerApp::Viddler.user, ::ViddlerApp::Viddler.password, :get_record_token => "1"
+        @@session ||= begin
+          session = ::Viddler::Client.new(::ViddlerApp::Viddler.api_key)
+          session.xauthenticate! ::ViddlerApp::Viddler.user, ::ViddlerApp::Viddler.password, :get_record_token => "1"
+          session
+        end
+      end
+      
+      def session
         @@session
       end
       
@@ -81,6 +88,18 @@ class Video < ActiveRecord::Base
     self.url ||= result['video']['url']
     self.thumbnail_url ||= result['video']['thumbnail_url']
     result
+  end
+  
+  def published?
+    !!self.published_at
+  end
+  
+  def authenticated?
+    !!self.user
+  end
+
+  def human_source_name
+    webcam? ? I18n.t("videos.recorded_video") : I18n.t("videos.uploaded_video")
   end
   
 end
