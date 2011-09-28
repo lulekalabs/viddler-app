@@ -5,12 +5,12 @@
     <title><%= page_title %></title>
     <meta name="description" content="">
     <meta name="author" content="Business Vision">
-		<meta property="og:title" content="<%= fb_title %>" />
-		<meta property="og:type" content="movie" />
-		<meta property="og:url" content="<%= url_for({}) %>" />
-		<meta property="og:image" content="<%= fb_thumbnail_url %>" />
-		<meta property="og:site_name" content="<%= t "site.name" %>" />
-		<meta property="fb:admins" content="722924084" />
+    <meta property="og:title" content="<%= fb_title %>" />
+    <meta property="og:type" content="movie" />
+    <meta property="og:url" content="<%= url_for({}) %>" />
+    <meta property="og:image" content="<%= fb_thumbnail_url %>" />
+    <meta property="og:site_name" content="<%= t "site.name" %>" />
+    <meta property="fb:admins" content="722924084" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -18,19 +18,19 @@
     <![endif]-->
 
     <!-- Le styles -->
-	  <%= stylesheet_link_tag "application" %>
-		<%= javascript_include_tag "application" %>
-	  <%= csrf_meta_tags %>
-	  <%= javascript_include_tag "//cdn-static.viddler.com/js/viddler.js" %>
-	  <%= javascript_include_tag "//platform.twitter.com/widgets.js" %>
-		<%= javascript_tag do %>
-			$(function() {
-				<% flash.each do |key, msg| %>
-					$.alert('<%= msg %>', '<%= key %>');
-				<% end %>
-			});
-		<% end %>
-		
+    <%= stylesheet_link_tag "application" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= javascript_include_tag "//cdn-static.viddler.com/js/viddler.js" %>
+    <%= javascript_include_tag "//platform.twitter.com/widgets.js" %>
+    <%= javascript_tag do %>
+      $(function() {
+        <% flash.each do |key, msg| %>
+          $.alert('<%= msg %>', '<%= key %>');
+        <% end %>
+      });
+    <% end %>
+    
     <!-- Le fav and touch icons -->
     <link rel="shortcut icon" href="/assets/images/favicon.ico">
     <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
@@ -40,28 +40,28 @@
 
   <body>
     <div class="topbar">
-			<div class="alert-message block-message error fade in hide"></div>
+      <div class="alert-message block-message error fade in hide"></div>
       <div class="fill">
         <div class="container">
           <a class="brand" href="/"><%=raw t "topbar.brand" %></a>
           <ul class="nav">
             <li>
-							<a href="#about" data-controls-modal="modal-about" data-backdrop="static"><%=raw t "topbar.about" %></a>
-							<div id="modal-about" class="modal hide fade in">
-								<div class="modal-header">
-									<a href="#" class="close">×</a>
-									<h3><%=raw t "topbar.about" %> <%= t "site.name" %></h3>
-								</div>
-								<div class="modal-body">
-									<p><%=raw t "about.one" %></p>
-									<p><%=raw t "about.two" %></p>
-									<p><%=raw t "about.three" %></p>
-								</div>
-							</div>
-						</li>
+              <a href="#about" data-controls-modal="modal-about" data-backdrop="static"><%=raw t "topbar.about" %></a>
+              <div id="modal-about" class="modal hide fade in">
+                <div class="modal-header">
+                  <a href="#" class="close">×</a>
+                  <h3><%=raw t "topbar.about" %> <%= t "site.name" %></h3>
+                </div>
+                <div class="modal-body">
+                  <p><%=raw t "about.one" %></p>
+                  <p><%=raw t "about.two" %></p>
+                  <p><%=raw t "about.three" %></p>
+                </div>
+              </div>
+            </li>
             <li>
-							<%= mail_to "rubylabs@bvision.com", t("topbar.contact"), :encode => "javascript" %>
-						</li>
+              <%= mail_to "rubylabs@bvision.com", t("topbar.contact"), :encode => "javascript" %>
+            </li>
           </ul>
         </div>
       </div>
@@ -74,58 +74,58 @@
         <h1><%= t "home.title" %></h1>
         <p><%= t "home.description" %></p>
         <p>
-					<a id="upload-button" class="btn primary large" data-controls-modal="modal-uploader" data-backdrop="static"><%= t "home.upload" %></a>
-					&nbsp;<%= t "home.or" %>&nbsp;
-					<a id="record-button" class="btn secondary large" data-controls-modal="modal-recorder" data-backdrop="static"><%= t "home.webcam" %></a>
-				</p>
+          <a id="upload-button" class="btn primary large" data-controls-modal="modal-uploader" data-backdrop="static"><%= t "home.upload" %></a>
+          &nbsp;<%= t "home.or" %>&nbsp;
+          <a id="record-button" class="btn secondary large" data-controls-modal="modal-recorder" data-backdrop="static"><%= t "home.webcam" %></a>
+        </p>
 
-				<!-- upload modal -->
-				<%= render "new" %>
+        <!-- upload modal -->
+        <%= render "new" %>
 
-				<!-- record modal -->
-				<%= render "new", :source => "webcam" %>
-				
+        <!-- record modal -->
+        <%= render "new", :source => "webcam" %>
+        
       </div>
       <h2><%= t "home.list_header" %></h2>
-			<ul id="videos" class="media-grid">
-				<li><p><%= t "home.list_loading" %><p></li>
-			</ul>
-			
-			<%= yield %>
-			
+      <ul id="videos" class="media-grid">
+        <li><p><%= t "home.list_loading" %><p></li>
+      </ul>
+      
+      <%= yield %>
+      
       <footer>
         <p>
-					&copy; <%= t("site.company") %> <%= Time.now.year %>
-				</p>
-				<div class="share">
-					<div class="twitter-button">
-					  <a href="https://twitter.com/share?url=<%= root_url %>&amp;via=business_vision&amp;text=<%=u t("twitter", :title => "").strip %>" class="twitter-share-button">Tweet</a>
-					</div>
-					<div class="facebook-button">
-						<fb:like send="false" layout="button_count" width="250" show_faces="false" href="<%= root_url %>"></fb:like>
-					</div>
-				</div>
+          &copy; <%= t("site.company") %> <%= Time.now.year %>
+        </p>
+        <div class="share">
+          <div class="twitter-button">
+            <a href="https://twitter.com/share?url=<%= root_url %>&amp;via=business_vision&amp;text=<%=u t("twitter", :title => "").strip %>" class="twitter-share-button">Tweet</a>
+          </div>
+          <div class="facebook-button">
+            <fb:like send="false" layout="button_count" width="250" show_faces="false" href="<%= root_url %>"></fb:like>
+          </div>
+        </div>
       </footer>
 
     </div> <!-- /container -->
-		<!-- facebook -->
-		<div id="fb-root"></div>
-		<%= javascript_tag do %>
-			window.fbAsyncInit = function() {
-				FB.init({
-					appId  : '145968922165089',
-					status : true,
-					cookie : true,
-					xfbml  : true
-				});
-			};
+    <!-- facebook -->
+    <div id="fb-root"></div>
+    <%= javascript_tag do %>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId  : '145968922165089',
+          status : true,
+          cookie : true,
+          xfbml  : true
+        });
+      };
 
-			(function() {
-				var e = document.createElement('script');
-				e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
-				e.async = true;
-				document.getElementById('fb-root').appendChild(e);
-			}());
-		<% end %>
+      (function() {
+        var e = document.createElement('script');
+        e.src = document.location.protocol + '//connect.facebook.net/en_US/all.js';
+        e.async = true;
+        document.getElementById('fb-root').appendChild(e);
+      }());
+    <% end %>
   </body>
 </html>

@@ -15,80 +15,80 @@
 //= require bootstrap-twipsy
 //= require bootstrap-popover
 <%
-	app = Rails.application.routes.url_helpers
+  app = Rails.application.routes.url_helpers
 %>
 $(function() {
-	$('#videos').load('<%= app.list_videos_path %>');
-	$('.cancel').click(function() {
-		$(document).trigger("hide-popovers");
-	});
-	$(".alert-message").alert();
+  $('#videos').load('<%= app.list_videos_path %>');
+  $('.cancel').click(function() {
+    $(document).trigger("hide-popovers");
+  });
+  $(".alert-message").alert();
 });
 
 $(document).bind("reset-form", function(event) {
-	$('#upload-form').each (function(){
-	  this.reset();
-	});
-	$('#upload-form .help-block.error').remove();
+  $('#upload-form').each (function(){
+    this.reset();
+  });
+  $('#upload-form .help-block.error').remove();
 });
 
 $(document).bind("hide-popovers", function(event) {
-	$("#modal-recorder").modal("hide");
-	$("#modal-uploader").modal("hide");
-	$(".video-popup").each(function(i,e) {
-		if($(e).is(":visible")) $(e).modal("hide")
-	});
-	
-	$("a[rel=popover]").each(function(i,e) {
-		if($(e).is(":visible")) $(e).popover("hide")
-	});
+  $("#modal-recorder").modal("hide");
+  $("#modal-uploader").modal("hide");
+  $(".video-popup").each(function(i,e) {
+    if($(e).is(":visible")) $(e).modal("hide")
+  });
+  
+  $("a[rel=popover]").each(function(i,e) {
+    if($(e).is(":visible")) $(e).popover("hide")
+  });
 });
 
 $(document).bind("list-loaded", function(event) {
-	$("a[rel=popover]")
-	.popover({
-		offset: 10,
-		html: true,
-		placement: 'below'
-	})
-	.click(function(e) {
-		e.preventDefault()
-	});
-	
-	$("a.video-delete").click(function(event) {
-		if(confirm("Do you want to delete this video?")) {
-			$.post(this.href)
-				.success(function(data, status, jqXHR) {
-			    $('#videos').html(data);
-					$(document).trigger("hide-popovers");
-					return false;
-				})
-				.error(function(data, status, jqXHR) {
-					alert('Error deleting video.');
-					$(document).trigger("hide-popovers");
-					return false;
-				});
-		}
-		event.preventDefault();
-	});
-	
-	twttr.widgets.load();
-	FB.XFBML.parse();
+  $("a[rel=popover]")
+  .popover({
+    offset: 10,
+    html: true,
+    placement: 'below'
+  })
+  .click(function(e) {
+    e.preventDefault()
+  });
+  
+  $("a.video-delete").click(function(event) {
+    if(confirm("Do you want to delete this video?")) {
+      $.post(this.href)
+        .success(function(data, status, jqXHR) {
+          $('#videos').html(data);
+          $(document).trigger("hide-popovers");
+          return false;
+        })
+        .error(function(data, status, jqXHR) {
+          alert('Error deleting video.');
+          $(document).trigger("hide-popovers");
+          return false;
+        });
+    }
+    event.preventDefault();
+  });
+  
+  twttr.widgets.load();
+  FB.XFBML.parse();
 });
 
 jQuery.extend({
-	/* 
-	 *  E.g. $.alert("This is an errror", "error"); 
-	 */
-	alert: function(text, type) {
-		if(typeof(type) === "undefined") type = "info";
-		var selector = ".topbar .alert-message" + "." + type;
-		$(selector).remove();
-		$(".topbar").prepend('<div class="alert-message block-message ' + type + '"><a class="close" href="#">×</a></div>');
-		$(".topbar .alert-message" + "." + type).alert();
-		$(selector).append(text);
-		$(selector).show();
-	}
+  /* 
+   *  E.g. $.alert("This is an errror", "error"); 
+   */
+  alert: function(text, type) {
+    if(typeof(type) === "undefined") type = "info";
+    var selector = ".topbar .alert-message" + "." + type;
+    $(selector).remove();
+    $(".topbar").prepend('<div class="alert-message block-message ' + type + '"><a class="close" href="#">×</a></div>');
+    $(".topbar .alert-message" + "." + type).alert();
+    $(selector).append(text);
+    $(selector).show();
+  }
 });
 
 clientSideValidations.formBuilders['SimpleForm::FormBuilder']['add'] = function(element, settings, message) {
@@ -97,7 +97,7 @@ clientSideValidations.formBuilders['SimpleForm::FormBuilder']['add'] = function(
     wrapper.addClass(settings.wrapper_error_class);
     var errorElement = $('<' + settings.error_tag + ' class="' + settings.error_class + '">' + message + '</' + settings.error_tag + '>');
     wrapper.append(errorElement);
-	  element.parents("div.clearfix").addClass("error");
+    element.parents("div.clearfix").addClass("error");
   } else {
     element.parent().find(settings.error_tag + '.' + settings.error_class).text(message);
   }
@@ -112,10 +112,10 @@ clientSideValidations.formBuilders['SimpleForm::FormBuilder']['remove'] = functi
 }
 
 function recordDone(username, user_video_number, video_id) {
-	var json = {video:{video_id: video_id, source: "webcam"}}
-	$.post('<%= app.videos_path %>', json, function(data) {}, "script");
+  var json = {video:{video_id: video_id, source: "webcam"}}
+  $.post('<%= app.videos_path %>', json, function(data) {}, "script");
 }
 
 function recordStopped() {
-	$(document).trigger("hide-popovers");
+  $(document).trigger("hide-popovers");
 }

@@ -26,7 +26,7 @@ ActiveAdmin::Dashboards.build do
       t.column :email
     end
   end
-  
+
   # == Render Partial Section
   # The block is rendered within the context of the view, so you can
   # easily render a partial rather than build content in ruby.
@@ -36,7 +36,7 @@ ActiveAdmin::Dashboards.build do
   #       render 'recent_posts' # => this will render /app/views/admin/dashboard/_recent_posts.html.erb
   #     end
   #   end
-  
+
   # == Section Ordering
   # The dashboard sections are ordered by a given priority from top left to
   # bottom right. The default priority is 10. By giving a section numerically lower
