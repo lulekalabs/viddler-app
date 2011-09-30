@@ -1,3 +1,4 @@
+require 'digest/md5'
 module ApplicationHelper
   
   def error_messages(target, wrap = false)
@@ -29,6 +30,10 @@ module ApplicationHelper
   def video_embed_code(video_id, options = {})
     result = Video::Viddler.session.get('viddler.videos.getEmbedCode', {:video_id => video_id}.merge(options))
     result['video']['embed_code'].html_safe
+  end
+
+  def gravatar_url_for(email, options = {})
+    "#{request.protocol}www.gravatar.com/avatar/#{Digest::MD5.hexdigest(email.strip.downcase)}"
   end
 
 end

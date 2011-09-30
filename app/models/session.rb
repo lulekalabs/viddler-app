@@ -1,5 +1,6 @@
 class Session < ActiveRecord::Base
   belongs_to :user
+  has_many :videos
   validates :session_id, :uniqueness => {:case_sensitive => false}
   
   def videos
