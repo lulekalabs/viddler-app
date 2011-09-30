@@ -15,13 +15,6 @@ ActiveAdmin.register Video do
       video_status_tag(video)
     end
     default_actions
-=begin    
-    column do |video|
-      links = link_to I18n.t('active_admin.view'), resource_path(video), :class => "member_link view_link"
-      links += link_to I18n.t('active_admin.edit'), edit_resource_path(video), :class => "member_link view_link"
-      links
-    end
-=end    
   end
   
   form do |f|
@@ -65,15 +58,20 @@ ActiveAdmin.register Video do
     render "player"
   end
   
-  member_action :publish do
-    video = Video.find params[:id]
-    video.update_attribute(:published_at, Time.now)
-    redirect_to admin_video_path(video)
+  member_action :toggle do
+    if resource.published_at
+      resource.update_attribute(:published_at, nil)
+    else
+      resource.update_attribute(:published_at, Time.now)
+    end
+    redirect_to admin_video_path(resource)
   end
 
   action_item :only => [:edit, :show] do
     if resource.authenticated? && !resource.published?
-      link_to "Publish Video", publish_admin_video_path(resource), :class => "member_link view_link"
+      link_to "Publish Video", toggle_admin_video_path(resource), :class => "member_link view_link"
+    elsif resource.authenticated? && resource.published?
+      link_to "Hide Video", toggle_admin_video_path(resource), :class => "member_link view_link"
     end
   end
 
