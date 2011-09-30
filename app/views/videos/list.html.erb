@@ -3,7 +3,7 @@
 <% else %>
 	<% @videos.each do |video| %>
 	<li>
-		<% if @session == video.session && !video.user %>
+		<% if current_session == video.session && !video.user %>
 			<% @delete_button = capture do %>
 				<%= delete_video_link(video) %>
 			<% end %>
@@ -11,7 +11,7 @@
 				partial = "edit"
 				dom_id = edit_video_dom_id(video)
 			%>
-		<% elsif @session == video.session || (video.user && @session.user == video.user) %>
+		<% elsif current_session == video.session || (video.user && current_session.user == video.user) %>
 			<% @delete_button = capture do %>
 				<%= delete_video_link(video) %>
 			<% end %>

@@ -72,6 +72,12 @@ $(document).bind("list-loaded", function(event) {
     event.preventDefault();
   });
   
+  $('.cancel').click(function() {
+    $(document).trigger("hide-popovers");
+  });
+  
+  $('form[data-validate]').validate();
+  
   twttr.widgets.load();
   FB.XFBML.parse();
 });

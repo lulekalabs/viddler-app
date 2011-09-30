@@ -1,6 +1,7 @@
 ActiveAdmin.register Video do
 
   scope :all
+  scope :registered
   scope :published
   scope :unpublished
 
@@ -44,7 +45,7 @@ ActiveAdmin.register Video do
       end
     end
     
-    if resource.authenticated?
+    if resource.registered?
       panel "User" do
         attributes_table_for resource.user do
           row :name
@@ -68,9 +69,9 @@ ActiveAdmin.register Video do
   end
 
   action_item :only => [:edit, :show] do
-    if resource.authenticated? && !resource.published?
+    if resource.registered? && !resource.published?
       link_to "Publish Video", toggle_admin_video_path(resource), :class => "member_link view_link"
-    elsif resource.authenticated? && resource.published?
+    elsif resource.registered? && resource.published?
       link_to "Hide Video", toggle_admin_video_path(resource), :class => "member_link view_link"
     end
   end

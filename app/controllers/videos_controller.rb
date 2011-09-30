@@ -4,11 +4,11 @@ class VideosController < ApplicationController
   before_filter :get_record_token
   before_filter :prepare_upload
   before_filter :find_video, :only => [:show, :edit, :update, :delete]
-  before_filter :can_update, :only => [:edit, :update]
+  before_filter :authentication_required, :only => [:edit, :update]
   before_filter :find_videos, :only => :list
   before_filter :build_user, :only => [:edit, :update]
   before_filter :build_video, :only => [:new, :index, :create, :uploaded]
-  after_filter :update_session, :only => :update
+  after_filter :update_current_session_with_user, :only => :update
   
   def index
     # nothing to do here
@@ -59,7 +59,7 @@ class VideosController < ApplicationController
   end
   
   def find_videos
-    @videos = @session.videos
+    @videos = current_session.videos
   end
 
   def video_params
@@ -77,7 +77,7 @@ class VideosController < ApplicationController
   end
   
   def build_video
-    @video = Video.instance_for({:source => "upload", :session => @session}.merge(video_params.merge(:user => @user)))
+    @video = Video.instance_for({:source => "upload", :session => current_session}.merge(video_params.merge(:user => @user)))
   end
   
   def find_video
@@ -89,14 +89,16 @@ class VideosController < ApplicationController
     end
   end
   
-  def update_session
-    if @session == @video.session && @video.user && @video.user.errors.blank?
-      @session.update_attribute(:user, @video.user)
+  def update_current_session_with_user
+    if @video && @video.session == current_session && @video.user && @video.user.errors.blank?
+      current_session.update_attribute(:user, @video.user)
     end
   end
 
-  def can_update
-    redirect_to video_path(@video), :status => :moved_permanently if @video && @video.authenticated?
+  def authentication_required
+    if @video && (@video.registered? || @video.session != current_session)
+      redirect_to video_path(@video), :status => :moved_permanently
+    end
   end
   
 end

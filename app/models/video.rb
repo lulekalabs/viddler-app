@@ -14,7 +14,7 @@ class Video < ActiveRecord::Base
 
   scope :published, where("published_at IS NOT NULL")
   scope :unpublished, where("published_at IS NULL AND user_id IS NOT NULL")
-  scope :authenticated, where("user_id IS NOT NULL")
+  scope :registered, where("user_id IS NOT NULL")
   scope :recent, order("created_at desc")
 
   after_destroy :delete_video
@@ -94,7 +94,7 @@ class Video < ActiveRecord::Base
     !!self.published_at
   end
   
-  def authenticated?
+  def registered?
     !!self.user
   end
 
