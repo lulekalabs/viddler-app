@@ -59,6 +59,8 @@ en:
 
     show:
       delete: "Remove"
+      vote: "Vote"
+      voted: "Voted"
     edit:
       title: Edit Video
       submit: "Update"

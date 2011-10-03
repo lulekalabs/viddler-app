@@ -5,8 +5,8 @@ class VotesController < ApplicationController
     respond_to do |format|
       format.json do
         @vote = Vote.new(:video => @video, :session => current_session, :points => 1)
-        if @vote.valid?
-          render :json => @vote, :status => :created
+        if @vote.save
+          render :json => @vote.to_json(:include => :video), :status => :created
         else
           logger.debug @vote.errors.inspect
           render :json => @vote.errors, :status => :unprocessable_entity

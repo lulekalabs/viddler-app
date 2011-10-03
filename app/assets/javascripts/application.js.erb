@@ -81,13 +81,17 @@ $(document).bind("list-loaded", function(event) {
     $(this).removeClass("active").addClass("disabled");
     $.post(this.href, {}, "JSON")
       .success(function(data, status, jqXHR) {
-        alert(data.video.video_id);
-        $("a[data-video-id=" + data.video.video_id + "]").removeClass("disabled").addClass("voted");
+        var link = $("a[data-video-id=" + data.video.video_id + "]");
+        link.removeClass("disabled")
+          .addClass("voted")
+          .unbind("click")
+          .html("<%= I18n.t("videos.show.voted") %>");
+        link.each(function(i, e) { e.href = "#" });
         $(document).trigger("hide-popovers");
         return false;
       })
       .error(function(data, status, jqXHR) {
-        alert('Error voting on video.');
+        $.alert('Error voting on video.', 'error');
         $(document).trigger("hide-popovers");
         return false;
       });
