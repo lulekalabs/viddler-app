@@ -1,11 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-one:
-  session_id: MyString
-  ip: MyString
-  user_agent: MyString
+ken:
+  user: ken
+  session_id: "6fa440dedb6a034c9641a8484aa0aa53"
+  ip: "127.0.0.1"
+  user_agent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_1) AppleWebKit/534.48.3 (KHTML, like Gecko) Version/5.1 Safari/534.48.3"
 
-two:
-  session_id: MyString
-  ip: MyString
-  user_agent: MyString
+marie:
+  user: marie
+  session_id: "6fa440dedb6a034c9641a8484aa0aa54"
+  ip: "127.0.0.2"
+  user_agent: "Gozilla/5.0 (Macintosh; Intel Mac OS X 10_7_1) AppleWebKit/534.48.3 (KHTML, like Gecko) Version/5.1 Safari/534.48.3"

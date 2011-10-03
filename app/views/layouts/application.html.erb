@@ -93,18 +93,36 @@
           &nbsp;<%= t "home.or" %>&nbsp;
           <a id="record-button" class="btn secondary large" data-controls-modal="modal-recorder" data-backdrop="static"><%= t "home.webcam" %></a>
         </p>
-
         <!-- upload modal -->
         <%= render "new" %>
-
         <!-- record modal -->
         <%= render "new", :source => "webcam" %>
-        
       </div>
-      <h2><%= t "home.list_header" %></h2>
-      <ul id="videos" class="media-grid">
-        <li><p><%= t "home.list_loading" %><p></li>
+      
+      <ul class="tabs" data-tabs="tabs">
+        <li class="active"><a href="#recent"><%= t "home.tabs.recent" %></a></li>
+        <li><a href="#popular"><%= t "home.tabs.popular" %></a></li>
+        <% if current_session %>
+        <li><a href="#my-videos"><%= t "home.tabs.my_videos" %></a></li>
+        <% end %>
       </ul>
+      <div class="tab-content">
+        <div class="active" id="recent">
+          <ul id="recent-videos" class="media-grid">
+            <li><p><%= t "home.list_loading" %><p></li>
+          </ul>
+        </div>
+        <div id="popular">
+          <ul id="popular-videos" class="media-grid">
+            <li><p><%= t "home.list_loading" %><p></li>
+          </ul>
+        </div>
+        <div id="my-videos">
+          <ul id="my-videos" class="media-grid">
+            <li><p><%= t "home.list_loading" %><p></li>
+          </ul>
+        </div>
+      </div>
       
       <%= yield %>
       

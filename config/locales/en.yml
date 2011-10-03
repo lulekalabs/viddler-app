@@ -20,7 +20,11 @@ en:
     or: "or"
     list_header: "Latest Videos"
     list_loading: "Loading..."
-    
+    tabs:
+      recent: Recent  
+      puplare: Populare
+      my_videos: My Videos
+      
   about:
     one: "Coffee Talk is a simple video recording and uploading app."
     two: 'The recorder as well as the video player is realized using <a href="http://www.viddler.com/" target="_blank">Viddler</a>. Videos can be set as completely private, public, or configured according to a custom workflow.'
@@ -41,6 +45,10 @@ en:
   videos:
     uploaded_video: "Uploaded Video"
     recorded_video: "Webcam Video"
+    status:
+      published: "Published"
+      registered: "Registered"
+      created: "Created"
     new:
       title: "Upload Video"
       submit: "Upload"

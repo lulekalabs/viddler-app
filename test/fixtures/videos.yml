@@ -1,7 +1,25 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+kenya:
+  user: ken
+  session: ken
+  title: Kenya Fun Compressed
+  description: "Wouldn't it be nice if we had some Kenya fun"
+  tags: "kenya, fun, coffee"
+  url: "http://www.viddler.com/explore/bvision_dev/videos/56/"
+  thumbnail_url: "http://cdn-thumbs.viddler.com/thumbnail_2_7fbb6ccc_v1.jpg"
+  video_id: "7fbb6ccc"
+  slug: "7fbb6ccc"
+  votes_count: 1
+  votes_sum: 1
 
-one:
-  title: MyString
-
-two:
-  title: MyString
+sweet_maria:
+  user: marie
+  session: marie
+  title: Sweet Maria
+  description: "The finest blend ever from New Hampshire"
+  tags: "marie, blend, new hampshire"
+  url: "http://www.viddler.com/explore/bvision_dev/videos/57/"
+  thumbnail_url: "http://cdn-thumbs.viddler.com/thumbnail_2_7fbb6ccd_v1.jpg"
+  video_id: "7fbb6ccd"
+  slug: "7fbb6ccd"
+  votes_count: 0
+  votes_sum: 0

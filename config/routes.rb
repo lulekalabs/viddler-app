@@ -57,6 +57,7 @@ ViddlerApp::Application.routes.draw do
     member do 
       post 'delete'
     end
+    resource :vote, :only => [:create, :destroy]
   end
   
   # You can have the root of your site routed with "root"

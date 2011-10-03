@@ -15,6 +15,7 @@
 		</p>
 	</div>
 	<div class="modal-footer">
+	  <a href="<%= video_vote_path(video) %>" class="btn primary vote-video active" rel="nofollow" data-video-id="<%= video.video_id %>">Vote</a>
 		<div class="twitter-button">
 		  <a href="https://twitter.com/share?url=<%= video_url(video) %>&amp;via=<%=u t("site.twitter").strip %>&amp;text=<%=u t("twitter", :title => video.title).strip %>" class="twitter-share-button">Tweet</a>
 		</div>

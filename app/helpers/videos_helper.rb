@@ -25,7 +25,17 @@ module VideosHelper
   end
   
   def delete_video_link(video = @video)
-    %(<a href="#{delete_video_path(video.video_id)}" class="btn secondary video-delete" rel="nofollow" data-content="#{video.video_id}">#{t ".delete"}</a>).html_safe
+    %(<a href="#{delete_video_path(video.video_id)}" class="btn secondary delete-video" rel="nofollow" data-content="#{video.video_id}">#{t ".delete"}</a>).html_safe
+  end
+
+  def video_status_label(video)
+    if video.published?
+      "success"
+    elsif video.registered?
+      "notice"
+    else
+      "default"
+    end
   end
   
 end

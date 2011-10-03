@@ -10,4 +10,17 @@ class ActiveSupport::TestCase
   fixtures :all
 
   # Add more helper methods to be used by all tests here...
+  def assert_error_on(record, *fields)
+    record.valid?
+    fields.each do |field|
+      assert !record.errors[field.to_sym].empty?, "expected errors on #{field}"
+    end
+  end
+
+  def assert_no_error_on(record, *fields)
+    record.valid?
+    fields.each do |field|
+      assert record.errors[field.to_sym].empty?, "expected no errors on #{field}"
+    end
+  end
 end

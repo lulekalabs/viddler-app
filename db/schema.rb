@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110928144017) do
+ActiveRecord::Schema.define(:version => 20111003150507) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -81,6 +81,8 @@ ActiveRecord::Schema.define(:version => 20110928144017) do
     t.datetime "published_at"
     t.string   "source"
     t.string   "slug"
+    t.integer  "votes_count",   :default => 0, :null => false
+    t.integer  "votes_sum",     :default => 0, :null => false
   end
 
   add_index "videos", ["published_at"], :name => "index_videos_on_published_at"
@@ -88,5 +90,16 @@ ActiveRecord::Schema.define(:version => 20110928144017) do
   add_index "videos", ["slug"], :name => "index_videos_on_slug"
   add_index "videos", ["user_id"], :name => "index_videos_on_user_id"
   add_index "videos", ["video_id"], :name => "index_videos_on_video_id"
+
+  create_table "votes", :force => true do |t|
+    t.integer  "video_id",                  :null => false
+    t.integer  "session_id",                :null => false
+    t.integer  "points",     :default => 0, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["session_id"], :name => "index_votes_on_session_id"
+  add_index "votes", ["video_id"], :name => "index_votes_on_video_id"
 
 end

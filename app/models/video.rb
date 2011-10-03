@@ -1,7 +1,9 @@
 class Video < ActiveRecord::Base
-  cattr_accessor :viddler
+  # cattr_accessor :viddler
   belongs_to :user
   belongs_to :session
+  has_many :votes
+  has_many :voters, :through => :votes, :source => :session
 
   validates :video_id, :uniqueness => {:case_sensitive => false}, :presence => true
   validates :title, :presence => true, :length => {:maximum => 140}, :on => :update
@@ -100,6 +102,16 @@ class Video < ActiveRecord::Base
 
   def human_source_name
     webcam? ? I18n.t("videos.recorded_video") : I18n.t("videos.uploaded_video")
+  end
+
+  def human_status_name
+    if self.published?
+      I18n.t("videos.status.published")
+    elsif self.registered?
+      I18n.t("videos.status.registered")
+    else
+      I18n.t("videos.status.created")
+    end
   end
   
 end

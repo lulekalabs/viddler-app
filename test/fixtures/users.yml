@@ -1,9 +1,7 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
-one:
-  name: MyString
-  email: MyString
-
-two:
-  name: MyString
-  email: MyString
+ken:
+  name: Ken Smith
+  email: ken@example.com
+  
+marie:
+  name: Marie Curie
+  email: marie@example.com

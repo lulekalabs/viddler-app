@@ -76,10 +76,6 @@ class VideosController < ApplicationController
     @video_upload_token = upload['upload']['token']
   end
   
-  def build_video
-    @video = Video.instance_for({:source => "upload", :session => current_session}.merge(video_params.merge(:user => @user)))
-  end
-  
   def find_video
     if @video = Video.find_by_video_id(params[:id])
       @user = @video.user
@@ -87,6 +83,10 @@ class VideosController < ApplicationController
       render :template => "videos/not_found"
       return false
     end
+  end
+  
+  def build_video
+    @video = Video.instance_for({:source => "upload", :session => current_session}.merge(video_params.merge(:user => @user)))
   end
   
   def update_current_session_with_user
