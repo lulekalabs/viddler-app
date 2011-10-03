@@ -5,6 +5,7 @@ en:
   site:
     name: Coffee Talk
     company: Business Vision S.A.
+    twitter: b-vision
 
   topbar:
     brand: 'Coffee <span class="label important">Talk</span>'
