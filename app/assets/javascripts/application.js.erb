@@ -88,7 +88,7 @@ $(document).bind("list-loaded", function(event) {
     $(this).removeClass("active").addClass("disabled").unbind("click");
     $.post($(this).attr("data-vote-video-url"), {}, "JSON")
       .success(function(data, status, jqXHR) {
-        var link = $("a[data-video-id=" + data.video.video_id + "]");
+        var link = $("a.vote-video[data-video-id=" + data.video.video_id + "]");
         link.removeClass("disabled")
           .addClass("voted")
           .html("<%= I18n.t("videos.show.voted") %>");
