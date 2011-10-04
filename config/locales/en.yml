@@ -38,7 +38,7 @@ en:
   
   upload_success: "<b>Well done!</b> The upload worked out great. Before we're done we need some last details."
   recording_success: "<b>Well done!</b> The recording was a hit. Before we're done we need some last details."
-  upload_error: "<b>Bummer!</b> Something went wrong with your upload. We're sorry, but please double-check your video footage and try again."
+  upload_error: "<b>Bummer!</b> Something went wrong with your upload. Double-check your video footage and try again."
   update_success: "<b>Awesome!</b> Thanks so much for your video submission. It will be available right after we've blessed it."
   video_not_found: "<b>Woopsi!</b> The video (%{id}) could not be found."
 
