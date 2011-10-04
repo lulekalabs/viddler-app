@@ -14,9 +14,10 @@ class Vote < ActiveRecord::Base
   end
   
   def ensure_unique_vote
-    if Vote.joins(:session => :user).
-      where("sessions.id" => self.session.id).count > 0
-        errors.add(:base, "already voted")
+    if Vote.joins(:session, :video).
+      where("sessions.id" => self.session.id).
+      where("videos.id" => self.video.id).count > 0
+        errors.add(:session, "already voted")
     end
   end
 end

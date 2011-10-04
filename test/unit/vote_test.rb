@@ -10,8 +10,13 @@ class VoteTest < ActiveSupport::TestCase
     assert_equal 3, vote.video.votes_sum
   end
   
-  test "should vote only once per campaign" do
+  test "should vote only once per video" do
     vote = Vote.new(:session => sessions(:ken), :video => videos(:kenya))
-    assert_error_on vote, :user
+    assert_error_on vote, :session
+  end
+
+  test "should vote once on multiple videos" do
+    vote = Vote.new(:session => sessions(:ken), :video => videos(:sweet_maria))
+    assert_no_error_on vote, :session
   end
 end
