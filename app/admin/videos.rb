@@ -70,9 +70,9 @@ ActiveAdmin.register Video do
 
   action_item :only => [:edit, :show] do
     if resource.registered? && !resource.published?
-      link_to "Publish Video", toggle_admin_video_path(resource), :class => "member_link view_link"
+      link_to "Activate Video", toggle_admin_video_path(resource), :class => "member_link view_link"
     elsif resource.registered? && resource.published?
-      link_to "Hide Video", toggle_admin_video_path(resource), :class => "member_link view_link"
+      link_to "Deactivate Video", toggle_admin_video_path(resource), :class => "member_link view_link"
     end
   end
 
