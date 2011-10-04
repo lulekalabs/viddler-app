@@ -34,10 +34,14 @@ class VideosController < ApplicationController
   def uploaded
     @video.video_id = params[:videoid]
     @video.sync_attributes!
-    if @video.save
-      redirect_to edit_video_path(@video), :notice => I18n.t(:upload_success)
-    else
-      redirect_to "/", :alert => I18n.t(:upload_error)
+    @video.save
+    respond_to do |format|
+      format.js
+      format.html do
+        responds_to_parent do
+          render :template => "videos/uploaded.js"
+        end
+      end
     end
   end
   

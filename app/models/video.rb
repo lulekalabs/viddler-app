@@ -20,7 +20,7 @@ class Video < ActiveRecord::Base
   scope :popular, order("videos.votes_sum DESC")
   scope :my, lambda {|su| su.is_a?(Session) ? where("videos.session_id = ?", su.id) : where("videos.user_id = ?", su.id)}
 
-  after_destroy :delete_video
+  after_destroy :delete_on_viddler
 
   class Viddler
     cattr_accessor :session
@@ -72,7 +72,7 @@ class Video < ActiveRecord::Base
     self.source == 'upload'
   end
   
-  def delete_video
+  def delete_on_viddler
     result = Video::Viddler.session.post 'viddler.videos.delete', 
       :sessionid => Video::Viddler.session.sessionid, :video_id => self.video_id
     !!result['success']
@@ -81,11 +81,14 @@ class Video < ActiveRecord::Base
   end
   
   def sync_attributes!
-    result = Video::Viddler.session.get 'viddler.videos.getDetails', :video_id => self.video_id
-    self.title ||= result['video']['title']
-    self.description ||= result['video']['description']
-    self.url ||= result['video']['url']
-    self.thumbnail_url ||= result['video']['thumbnail_url']
+    result = false
+    if self.video_id
+      result = Video::Viddler.session.get 'viddler.videos.getDetails', :video_id => self.video_id
+      self.title ||= result['video']['title']
+      self.description ||= result['video']['description']
+      self.url ||= result['video']['url']
+      self.thumbnail_url ||= result['video']['thumbnail_url']
+    end
     result
   end
   

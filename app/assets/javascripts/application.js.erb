@@ -27,7 +27,10 @@ $(function() {
   $(".alert-message").alert();
   
   $(".dropdown").dropdown();
-  $('.tabs').tabs();
+  $(".tabs").tabs();
+  $("#my-videos-menu-item").click(function() {
+    $("#my-videos-tab-link").trigger("click")
+  });
 });
 
 $(document).bind("reset-form", function(event) {
@@ -105,7 +108,12 @@ $(document).bind("list-loaded", function(event) {
     $(document).trigger("hide-popovers");
   });
   
-  $('form[data-validate]').validate();
+  $('form[data-validate]').each(function(index,form) {
+    if(typeof($(form).data("data-validate-binding")) === "undefined") {
+      // $(form).validate();
+      $(form).data("data-validate-binding", "true");
+    }
+  });
   
   twttr.widgets.load();
   FB.XFBML.parse();

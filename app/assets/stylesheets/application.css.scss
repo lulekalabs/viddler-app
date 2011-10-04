@@ -154,3 +154,12 @@ form.edit {
 .btn.voted:hover {
   background-position: 0;
 }
+
+#upload-iframe {
+  position: absolute;
+  top: 0;
+  left: -10000px;
+  width: 0;
+  height: 0;
+  border: 0
+}

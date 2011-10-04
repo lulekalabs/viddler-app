@@ -41,3 +41,4 @@ gem "client_side_validations"
 gem 'remotipart', '~> 1.0'
 gem 'activeadmin'
 gem 'friendly_id', '~> 4.0.0.beta'
+gem 'sprockets', '~> 2.0.2'

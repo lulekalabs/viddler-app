@@ -71,7 +71,7 @@
                 <%= current_session.user.name %>&nbsp;
               </a>
               <ul class="dropdown-menu">
-                <li><a href="<%= video_path(current_session.videos.first) %>">My video</a></li>
+                <li><a id="my-videos-menu-item" href="#">My videos</a></li>
                 <li class="divider"></li>
                 <li><a href="#">Sign out</a></li>
               </ul>
@@ -100,24 +100,24 @@
       </div>
       
       <ul class="tabs" data-tabs="tabs">
-        <li class="active"><a href="#recent"><%= t "home.tabs.recent" %></a></li>
-        <li><a href="#popular"><%= t "home.tabs.popular" %></a></li>
+        <li class="active"><a id="recent-videos-tab-link" href="#recent-videos-content"><%= t "home.tabs.recent" %></a></li>
+        <li><a id="popular-videos-tab-link" href="#popular-videos-content"><%= t "home.tabs.popular" %></a></li>
         <% if current_session %>
-        <li><a href="#my"><%= t "home.tabs.my_videos" %></a></li>
+        <li><a id="my-videos-tab-link" href="#my-videos-content"><%= t "home.tabs.my_videos" %></a></li>
         <% end %>
       </ul>
       <div class="tab-content">
-        <div class="active" id="recent">
+        <div class="active" id="recent-videos-content">
           <ul id="recent-videos" class="media-grid">
             <li><p><%= t "home.list_loading" %><p></li>
           </ul>
         </div>
-        <div id="popular">
+        <div id="popular-videos-content">
           <ul id="popular-videos" class="media-grid">
             <li><p><%= t "home.list_loading" %><p></li>
           </ul>
         </div>
-        <div id="my">
+        <div id="my-videos-content">
           <ul id="my-videos" class="media-grid">
             <li><p><%= t "home.list_loading" %><p></li>
           </ul>

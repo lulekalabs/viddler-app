@@ -7,7 +7,8 @@
 		<a href="#" class="close">×</a>
 		<h3><%= t ".title" %></h3>
 	</div>
-	<%= form_tag video_upload_url, :id => "upload-form", :multipart => true do |f| %> 
+	<%= form_tag video_upload_url, :id => "upload-form", :multipart => true, "data-validate" => "true",
+	    :target => "upload-iframe" do |f| %> 
 		<%= hidden_field_tag :uploadtoken, video_upload_token %>
 		<%= hidden_field_tag :callback, uploaded_videos_url %>
 		<div class="modal-body">
@@ -28,6 +29,7 @@
 			<button type="reset" class="btn cancel"><%= t ".reset" %></button>
 		</div>
 	<% end %>
+	<iframe name="upload-iframe" id="upload-iframe"></iframe>
 </div>
 
 <% else %>
