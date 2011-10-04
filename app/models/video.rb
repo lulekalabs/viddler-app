@@ -1,7 +1,7 @@
 class Video < ActiveRecord::Base
   belongs_to :user
   belongs_to :session
-  has_many :votes
+  has_many :votes, :dependent => :destroy
   has_many :voters, :through => :votes, :source => :session
 
   validates :video_id, :uniqueness => {:case_sensitive => false}, :presence => true

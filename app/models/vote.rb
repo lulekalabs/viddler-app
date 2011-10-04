@@ -5,12 +5,17 @@ class Vote < ActiveRecord::Base
   validates :points, :presence => true
   validate :ensure_unique_vote
   
-  after_create :update_votes_sum
-
+  after_create :update_counters
+  after_destroy :reset_counters
+  
   protected
   
-  def update_votes_sum
+  def update_counters
     self.video.class.update_counters(self.video.id, :votes_sum => self.points, :votes_count => 1)
+  end
+
+  def reset_counters
+    self.video.class.update_counters(self.video.id, :votes_sum => -self.points, :votes_count => -1)
   end
   
   def ensure_unique_vote
