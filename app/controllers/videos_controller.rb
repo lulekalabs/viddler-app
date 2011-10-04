@@ -1,11 +1,10 @@
 class VideosController < ApplicationController
-  respond_to :html, :js
+  respond_to :html, :js, :json
   before_filter :viddler_authenticate
   before_filter :get_record_token
   before_filter :prepare_upload
   before_filter :find_video, :only => [:show, :edit, :update, :delete]
   before_filter :authentication_required, :only => [:edit, :update]
-  before_filter :find_videos, :only => :list
   before_filter :build_user, :only => [:edit, :update]
   before_filter :build_video, :only => [:new, :index, :create, :uploaded]
   after_filter :update_current_session_with_user, :only => :update
@@ -14,10 +13,6 @@ class VideosController < ApplicationController
     # nothing to do here
   end
 
-  def list
-    render :layout => false
-  end
-  
   def create
     @video.sync_attributes!
     @video.save
@@ -31,14 +26,8 @@ class VideosController < ApplicationController
   end
   
   def delete
-    result = @viddler.post 'viddler.videos.delete', :sessionid => @viddler.sessionid, 
-      :video_id => params[:id]
-    if result['success']
-      Video.destroy_all(:video_id => params[:id])
-      find_videos and render :template => "videos/list", :layout => false
-    else
-      render :status => :unprocessable_entity
-    end
+    @video.destroy
+    respond_with @video
   end
   
   # viddler callback after file upload
@@ -50,6 +39,21 @@ class VideosController < ApplicationController
     else
       redirect_to "/", :alert => I18n.t(:upload_error)
     end
+  end
+  
+  def recent
+    @videos = current_session.videos.published.recent
+    render :template => "videos/list", :layout => false
+  end
+
+  def popular
+    @videos = current_session.videos.published.popular
+    render :template => "videos/list", :layout => false
+  end
+
+  def my
+    @videos = current_session.videos.my(current_session)
+    render :template => "videos/list", :layout => false
   end
   
   protected

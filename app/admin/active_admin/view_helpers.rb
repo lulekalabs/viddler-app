@@ -1,9 +1,9 @@
 def video_status_tag(video)
   if video.published?
-    status_tag("published", :ok)
+    status_tag(video.human_status_name, :ok)
   elsif video.registered?
-    status_tag("ready", :warning)
+    status_tag(video.human_status_name, :warning)
   else
-    status_tag("new", :cancel)
+    status_tag(video.human_status_name, :cancel)
   end
 end

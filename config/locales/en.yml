@@ -48,10 +48,13 @@ en:
     votes: 
       success: "Thanks for your vote."
       error: "Error voting this video."
+    delete:
+      success: "Your video was successfully deleted."
+      error: "Error deleting video."
     status:
       published: "Published"
       registered: "Registered"
-      created: "Created"
+      created: "Uploaded"
     new:
       title: "Upload Video"
       submit: "Upload"

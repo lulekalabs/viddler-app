@@ -23,7 +23,7 @@
 			%>
 		<% end %>
 		<%= render partial, :video => video %>
-		<a data-controls-modal="<%= dom_id %>" data-backdrop="static" rel="popover" data-content="<%= video.description %><span class='label <%= video_status_label(video) %>'><%= video.human_status_name %></span>" data-original-title="<%= video.title %>">
+		<a data-controls-modal="<%= dom_id %>" data-backdrop="static" rel="popover" data-content="<%= video.description %><span class='label <%= video_status_label(video) %>'><%= video.human_status_name %></span>" data-original-title="<%= video.title %>" data-video-id="<%= video.video_id %>" class="thumb">
 			<%= image_tag video.thumbnail_url, :size => "114x86", :alt => video.title %>
 		</a>
 	</li>

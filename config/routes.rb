@@ -51,7 +51,9 @@ ViddlerApp::Application.routes.draw do
 
   resources :videos do
     collection do
-      get 'list'
+      get 'recent'
+      get 'popular'
+      get 'my'
       get 'uploaded'
     end
     member do 

@@ -103,7 +103,7 @@
         <li class="active"><a href="#recent"><%= t "home.tabs.recent" %></a></li>
         <li><a href="#popular"><%= t "home.tabs.popular" %></a></li>
         <% if current_session %>
-        <li><a href="#my-videos"><%= t "home.tabs.my_videos" %></a></li>
+        <li><a href="#my"><%= t "home.tabs.my_videos" %></a></li>
         <% end %>
       </ul>
       <div class="tab-content">
@@ -117,7 +117,7 @@
             <li><p><%= t "home.list_loading" %><p></li>
           </ul>
         </div>
-        <div id="my-videos">
+        <div id="my">
           <ul id="my-videos" class="media-grid">
             <li><p><%= t "home.list_loading" %><p></li>
           </ul>

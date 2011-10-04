@@ -4,7 +4,7 @@
 	height ||= 436
 	dom_id ||= video_dom_id(video)
 %>
-<div id="<%= dom_id %>" class="modal hide fade in video-popup">
+<div id="<%= dom_id %>" data-video-id="<%= video.video_id %>" class="modal hide fade in video-popup">
 	<div class="modal-header">
 		<a href="#" class="close">×</a>
 		<h3><%= video.title || "No Title" %></h3>

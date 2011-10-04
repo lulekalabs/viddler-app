@@ -1,5 +1,4 @@
 class Video < ActiveRecord::Base
-  # cattr_accessor :viddler
   belongs_to :user
   belongs_to :session
   has_many :votes
@@ -14,10 +13,12 @@ class Video < ActiveRecord::Base
   extend FriendlyId
   friendly_id :video_id, :use => :slugged
 
-  scope :published, where("published_at IS NOT NULL")
-  scope :unpublished, where("published_at IS NULL AND user_id IS NOT NULL")
-  scope :registered, where("user_id IS NOT NULL")
-  scope :recent, order("created_at desc")
+  scope :published, where("videos.published_at IS NOT NULL")
+  scope :unpublished, where("videos.published_at IS NULL AND videos.user_id IS NOT NULL")
+  scope :registered, where("videos.user_id IS NOT NULL")
+  scope :recent, order("videos.created_at DESC")
+  scope :popular, order("videos.votes_sum DESC")
+  scope :my, lambda {|su| su.is_a?(Session) ? where("videos.session_id = ?", su.id) : where("videos.user_id = ?", su.id)}
 
   after_destroy :delete_video
 
@@ -71,20 +72,16 @@ class Video < ActiveRecord::Base
     self.source == 'upload'
   end
   
-  def viddler
-    Video::Viddler.session
-  end
-  
   def delete_video
-    result = self.viddler.post 'viddler.videos.delete', 
-      :sessionid => self.viddler.sessionid, :video_id => self.video_id
+    result = Video::Viddler.session.post 'viddler.videos.delete', 
+      :sessionid => Video::Viddler.session.sessionid, :video_id => self.video_id
     !!result['success']
   rescue Viddler::ApiException
     false
   end
   
   def sync_attributes!
-    result = self.viddler.get 'viddler.videos.getDetails', :video_id => self.video_id
+    result = Video::Viddler.session.get 'viddler.videos.getDetails', :video_id => self.video_id
     self.title ||= result['video']['title']
     self.description ||= result['video']['description']
     self.url ||= result['video']['url']
