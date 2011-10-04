@@ -28,6 +28,13 @@ module VideosHelper
     %(<a href="#{delete_video_path(video.video_id)}" class="btn secondary delete-video" rel="nofollow" data-content="#{video.video_id}">#{t ".delete"}</a>).html_safe
   end
 
+  def vote_video_link(video = @video)
+    if video.published?
+      text, state = video.voted?(current_session) ? [t(".voted"), "voted"] : [t(".vote"), "active"]
+      %(<a href="#" class="btn primary vote-video #{state}" rel="nofollow" data-vote-video-url="#{video_vote_path(video)}" data-video-id="#{video.video_id}">#{text}</a>).html_safe
+    end
+  end
+
   def video_status_label(video)
     if video.published?
       "success"

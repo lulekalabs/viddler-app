@@ -113,5 +113,9 @@ class Video < ActiveRecord::Base
       I18n.t("videos.status.created")
     end
   end
+
+  def voted?(session)
+    self.voters.where("sessions.id" => session.id).count > 0
+  end
   
 end

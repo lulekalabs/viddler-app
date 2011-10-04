@@ -78,20 +78,19 @@ $(document).bind("list-loaded", function(event) {
   
   // vote video
   $("a.vote-video.active").click(function(event) {
-    $(this).removeClass("active").addClass("disabled");
-    $.post(this.href, {}, "JSON")
+    $(this).removeClass("active").addClass("disabled").unbind("click");
+    $.post($(this).attr("data-vote-video-url"), {}, "JSON")
       .success(function(data, status, jqXHR) {
         var link = $("a[data-video-id=" + data.video.video_id + "]");
         link.removeClass("disabled")
           .addClass("voted")
-          .unbind("click")
           .html("<%= I18n.t("videos.show.voted") %>");
-        link.each(function(i, e) { e.href = "#" });
         $(document).trigger("hide-popovers");
+        $.alert("<%= I18n.t("videos.votes.success") %>", "success");
         return false;
       })
       .error(function(data, status, jqXHR) {
-        $.alert('Error voting on video.', 'error');
+        $.alert("<%= I18n.t("videos.votes.error") %>", "error");
         $(document).trigger("hide-popovers");
         return false;
       });

@@ -45,6 +45,9 @@ en:
   videos:
     uploaded_video: "Uploaded Video"
     recorded_video: "Webcam Video"
+    votes: 
+      success: "Thanks for your vote."
+      error: "Error voting this video."
     status:
       published: "Published"
       registered: "Registered"
