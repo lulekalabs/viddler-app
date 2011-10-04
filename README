@@ -1,3 +1,15 @@
 == Viddler App
 
-Prototype to show off video upload and camera recording of viddler.com using Rails 3.1.
+Prototype to show video upload and recording of viddler.com using Rails 3.1.
+
+== Installation
+
+bundle install
+rake db:migrate
+rake db:seed
+
+== Deployment
+
+git push heroku master
+heroku rake db:migrate
+heroku rake db:seed
