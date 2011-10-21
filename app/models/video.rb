@@ -73,10 +73,11 @@ class Video < ActiveRecord::Base
   end
   
   def delete_on_viddler
+    Video::Viddler.authenticate!
     result = Video::Viddler.session.post 'viddler.videos.delete', 
       :sessionid => Video::Viddler.session.sessionid, :video_id => self.video_id
     !!result['success']
-  rescue Viddler::ApiException
+  rescue ::Viddler::ApiException
     false
   end
   

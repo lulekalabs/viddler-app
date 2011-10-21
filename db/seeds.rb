@@ -18,3 +18,6 @@ admin = AdminUser.find_or_create_by_email 'manager@example.com'
 admin.password = 'sanfran415:paragon'
 admin.password_confirmation = 'sanfran415:paragon'
 admin.save!
+
+# Additional Admin User
+AdminUser.create!(:email => 'client@example.com', :password => 'password', :password_confirmation => 'password')
