@@ -6,23 +6,23 @@ module ViddlerApp
   
   @env[:development] = {
     :viddler => {
-      :api_key  => "7adz8onik15d1sfqcm0l",
-      :user     => "Extole",
-      :password => "G3Xnzgy1zGrcLc"
-      # :api_key  => "19naunv1iq7cz1q7xw4l",
-      # :user     => "bvision_dev",
-      # :password => "sanfran415"
+      # :api_key  => "7adz8onik15d1sfqcm0l",
+      # :user     => "Extole",
+      # :password => "G3Xnzgy1zGrcLc"
+      :api_key  => "19naunv1iq7cz1q7xw4l",
+      :user     => "bvision_dev",
+      :password => "sanfran415"
     }
   }
 
   @env[:production] = {
     :viddler => {
-      :api_key  => "7adz8onik15d1sfqcm0l",
-      :user     => "Extole",
-      :password => "G3Xnzgy1zGrcLc"
-      # :api_key  => "17yncitdjk2bn1zfjiry",
-      # :user     => "bvision",
-      # :password => "sanfran415"
+      # :api_key  => "7adz8onik15d1sfqcm0l",
+      # :user     => "Extole",
+      # :password => "G3Xnzgy1zGrcLc"
+      :api_key  => "17yncitdjk2bn1zfjiry",
+      :user     => "bvision",
+      :password => "sanfran415"
     }
   }
 
