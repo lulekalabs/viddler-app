@@ -17,8 +17,7 @@
 <%
   app = Rails.application.routes.url_helpers
 %>
-$(function() {
-  $('#recent-videos').load('<%= app.recent_videos_path %>');
+   $('#recent-videos').load('<%= app.recent_videos_path %>');
   $('#popular-videos').load('<%= app.popular_videos_path %>');
   $('#my-videos').load('<%= app.my_videos_path %>');
   $('.cancel').click(function() {

@@ -2,4 +2,10 @@
 db/*.sqlite3
 log/*.log
 tmp/
-.sass-cache/
+.rvmrc
+coverage/
+database.yml
+public/assets/*
+logfile
+.DS_Store
+samples/
